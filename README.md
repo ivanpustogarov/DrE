@@ -75,77 +75,58 @@ Build DrE
 CC=gcc CXX=g++ ./configure --with-uclibc=/home/ivan/Workspaces/klee-uclibc --with-llvm=/home/ivan/Workspaces/llvm-3.4 --enable-posix-runtime
 ```
 
-## Compile instructions 
-Check folder examples2.
-Let's look at toy-example1:
+## Example
+Let's look at examples2/toy-example1 (see below).
+It uses peripheral-related memory locations (e.g. `ADC10MEM`),
+and and interrupt. DrE is able to handle both.
+
+Compile this example as follows (use clang from llvm-3.4):
+
+```
+clang -D__MSP430G2553__ --target=msp430 -I../../memorymodels/symbolic/msp430g2553 -g -emit-llvm -Wall -c main.c
+path-to-DrE/Release+Asserts/bin/klee -search=random-state -entry-point=main -start-fn=main -target-fn=assert -mmodel=symbolic -imodel=cpuoff -plugpath=/path/to/DrE -chip=msp430g2553 main.bc
+```
+
+It should generate lots of debug output with the following lines at the end (which is the path constraints):
+
+```
+BINGO! Here is are the constraints in KQUERY format:
+State: 0x2511000; constraints:
+array ADC10MEM_arr1[16] : w32 -> w8 = symbolic
+array ADC10MEM_arr2[16] : w32 -> w8 = symbolic
+array ADC10MEM_arr3[16] : w32 -> w8 = symbolic
+array ADC10MEM_arr4[16] : w32 -> w8 = symbolic
+(query [(Eq 1
+             (ReadLSB w16 0 ADC10MEM_arr1))
+         (Eq 3
+             (ReadLSB w16 0 ADC10MEM_arr2))
+         (Eq 1
+             (ReadLSB w16 0 ADC10MEM_arr3))
+         (Eq false
+             (Eq 3
+                 (ReadLSB w16 0 ADC10MEM_arr4)))]
+        false)
+
+And here is are the constraints in SMTLIB2 format:
+(set-logic QF_AUFBV )
+(declare-fun ADC10MEM_arr1 () (Array (_ BitVec 32) (_ BitVec 8) ) )
+(declare-fun ADC10MEM_arr2 () (Array (_ BitVec 32) (_ BitVec 8) ) )
+(declare-fun ADC10MEM_arr3 () (Array (_ BitVec 32) (_ BitVec 8) ) )
+(declare-fun ADC10MEM_arr4 () (Array (_ BitVec 32) (_ BitVec 8) ) )
+(assert (and  (and  (and  (=  (_ bv1 16) (concat  (select  ADC10MEM_arr1 (_ bv1 32) ) (select  ADC10MEM_arr1 (_ bv0 32) ) ) ) (=  (_ bv3 16) (concat  (select  ADC10MEM_arr2 (_ bv1 32) ) (select  ADC10MEM_arr2 (_ bv0 32) ) ) ) ) (=  (_ bv1 16) (concat  (select  ADC10MEM_arr3 (_ bv1 32) ) (select  ADC10MEM_arr3 (_ bv0 32) ) ) ) ) (=  false (=  (_ bv3 16) (concat  (select  ADC10MEM_arr4 (_ bv1 32) ) (select  ADC10MEM_arr4 (_ bv0 32) ) ) ) ) ) )
+(check-sat)
+(exit)
+```
+
 
 ```C
+
+---> toy-example1.c
+
 #include <msp430.h>
 
-#define AVG_LEN (64)
-#define AVG_MASK (AVG_LEN - 1)
-int avg_buf[AVG_LEN] = {0};
+...
 
-int diff = 0;
-
-int printGesture(int gesture1, int gesture2);
-int classify_subgesture(int a);
-int avg(int);
-
-int printGesture(int gesture1, int gesture2)
-{
-  int a = 0;
-  if ((gesture1 == 1) && (gesture2 == 2))
-  {
-    assert(0);
-    a = 1;
-  }
-  else if ((gesture1 == 2) && (gesture2 == 3))
-  {
-    a = 2;
-  }
-  return 0;
-}
-
-int classify_subgesture(int a)
-{
-  return a;
-}
-
-//#define AVG_LEN (64)
-//#define AVG_MASK (AVG_LEN - 1)
-int avg(int newVal) {
-  //static int avg_buf[AVG_LEN] = {0};
-  static int index = 0;
-  static int sum = 0;  // TODO: change to 16 bits?
-  sum -= avg_buf[index & AVG_MASK];
-  sum += avg_buf[index++ & AVG_MASK] = newVal;
-  return sum / AVG_LEN;    // TODO: Check ASM to make sure it's a shift.
-}
-
-int getGesture()
-{
-  int a = 1;
-  __bis_SR_register(CPUOFF + GIE);        // LPM0, ADC10_ISR will force exit
-  if(diff == 1)
-  {
-    __bis_SR_register(CPUOFF + GIE);        // LPM0, ADC10_ISR will force exit
-    if(diff == 3)
-    {
-      int res1 = classify_subgesture(a);
-      return res1;
-    }
-    else
-    {
-      int res2 = classify_subgesture(a+1);
-      return res2;
-    }
-  }
-  int res3 = classify_subgesture(a+2);
-  return res3;
-}
-
-//int main(int argc, char *argv[])
 int main()
 {
   WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
