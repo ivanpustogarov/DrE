@@ -1,0 +1,1 @@
+clang -ccc-host-triple msp430-elf -c -emit-llvm -I/home/ubuntu/embedded/analysis/model/ -I/home/ubuntu/embedded/analysis/model/common -I/home/ubuntu/embedded/analysis/model/include -include/home/ubuntu/embedded/analysis/model/common/isr_compat.h -include/home/ubuntu/embedded/analysis/model/common/msp430.h -D__MSP430__=1 -D____=1 -Wmain ltoa.c -o ltoa.bc

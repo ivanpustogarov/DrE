@@ -1,0 +1,2 @@
+GrE is based on Klee, git version 6b0082b01e60ea2361da401694ea5aa7f7a6e966
+This version was complied and tested (by me) with llvm-3.4

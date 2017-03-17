@@ -1,0 +1,224 @@
+layout 0x10000
+range 0x1000 0x10ff persistent information_memory
+range 0x1000 0x103f flash
+range 0x1040 0x107f flash
+range 0x1080 0x10bf flash
+range 0x10c0 0x10ff flash
+addr IE1 0x0000 1
+addr IFG1 0x0002 1
+addr DCOCTL 0x0056 1
+addr BCSCTL1 0x0057 1
+addr BCSCTL2 0x0058 1
+addr BCSCTL3 0x0053 1
+addr FCTL1 0x0128 2
+addr FCTL2 0x012a 2
+addr FCTL3 0x012c 2
+addr P1IN 0x0020 1
+addr P1OUT 0x0021 1
+addr P1DIR 0x0022 1
+addr P1IFG 0x0023 1
+addr P1IES 0x0024 1
+addr P1IE 0x0025 1
+addr P1SEL 0x0026 1
+addr P1REN 0x0027 1
+addr P2IN 0x0028 1
+addr P2OUT 0x0029 1
+addr P2DIR 0x002a 1
+addr P2IFG 0x002b 1
+addr P2IES 0x002c 1
+addr P2IE 0x002d 1
+addr P2SEL 0x002e 1
+addr P2REN 0x002f 1
+addr TAIV 0x012e 2
+addr TACTL 0x0160 2
+addr TACCTL0 0x0162 2
+addr TACCTL1 0x0164 2
+addr TAR 0x0170 2
+addr TACCR0 0x0172 2
+addr TACCR1 0x0174 2
+addr WDTCTL 0x0120 2
+addr CALDCO_1MHZ 0x10fe 1
+addr CALBC1_1MHZ 0x10ff 1
+interrupt TIMER0_A1_ISR check_TIMER0_A1
+interrupt TIMER0_A0_ISR check_TIMER0_A0
+interrupt PORT1_ISR check_PORT1
+interrupt PORT2_ISR check_PORT2
+interrupt TIMERA1_ISR check_TIMERA1
+interrupt TIMERA0_ISR check_TIMERA0
+interrupt WDT_ISR check_WDT
+interrupt NMI_ISR check_NMI
+interrupt RESET_ISR check_RESET
+interrupt 2FLASH_IP_ISR check_2FLASH_IP
+interrupt 8BTC_ISR check_8BTC
+interrupt ADC10_ISR check_ADC10
+interrupt ADC10_A_ISR check_ADC10_A
+interrupt ADC10_B_ISR check_ADC10_B
+interrupt ADC12_ISR check_ADC12
+interrupt ADC12_B_ISR check_ADC12_B
+interrupt ADC12_PLUS_ISR check_ADC12_PLUS
+interrupt ADC14_ISR check_ADC14
+interrupt AES_ISR check_AES
+interrupt AES256_ISR check_AES256
+interrupt APOOL_ISR check_APOOL
+interrupt AUX_SUPPLY_ISR check_AUX_SUPPLY
+interrupt BACKUP_RAM_ISR check_BACKUP_RAM
+interrupt BASIC_CLOCK_ISR check_BASIC_CLOCK
+interrupt BATTERY_CHARGER_ISR check_BATTERY_CHARGER
+interrupt BC2_ISR check_BC2
+interrupt BT_ISR check_BT
+interrupt BT_RTC_ISR check_BT_RTC
+interrupt CAPLUS_ISR check_CAPLUS
+interrupt CAP_TOUCH_IO_0_ISR check_CAP_TOUCH_IO_0
+interrupt CAP_TOUCH_IO_1_ISR check_CAP_TOUCH_IO_1
+interrupt CC1101_ISR check_CC1101
+interrupt CCS_ISR check_CCS
+interrupt COMPA_ISR check_COMPA
+interrupt COMPB_ISR check_COMPB
+interrupt COMPD_ISR check_COMPD
+interrupt COMP_E_ISR check_COMP_E
+interrupt CRC_ISR check_CRC
+interrupt CS_ISR check_CS
+interrupt DAC12_1_ISR check_DAC12_1
+interrupt DAC12_2_ISR check_DAC12_2
+interrupt DMAX_3_ISR check_DMAX_3
+interrupt DMAX_6_ISR check_DMAX_6
+interrupt DMA_1_ISR check_DMA_1
+interrupt DMA_3_ISR check_DMA_3
+interrupt EPROM_ISR check_EPROM
+interrupt ESP430E_ISR check_ESP430E
+interrupt EUSCI_A0_ISR check_EUSCI_A0
+interrupt EUSCI_A1_ISR check_EUSCI_A1
+interrupt EUSCI_A2_ISR check_EUSCI_A2
+interrupt EUSCI_A3_ISR check_EUSCI_A3
+interrupt EUSCI_B0_ISR check_EUSCI_B0
+interrupt EUSCI_B1_ISR check_EUSCI_B1
+interrupt FLASH_ISR check_FLASH
+interrupt FLASH2_ISR check_FLASH2
+interrupt FLL_ISR check_FLL
+interrupt FLLPLUS_ISR check_FLLPLUS
+interrupt FLLPLUS_SMALL_ISR check_FLLPLUS_SMALL
+interrupt FRAM_ISR check_FRAM
+interrupt FRAM_FR5XX_ISR check_FRAM_FR5XX
+interrupt I2C_ISR check_I2C
+interrupt LCD_ISR check_LCD
+interrupt LCD4_ISR check_LCD4
+interrupt LCD_A_ISR check_LCD_A
+interrupt LCD_B_ISR check_LCD_B
+interrupt LCD_C_ISR check_LCD_C
+interrupt MID_ISR check_MID
+interrupt MPU_ISR check_MPU
+interrupt MPY_ISR check_MPY
+interrupt MPY32_ISR check_MPY32
+interrupt MSP430XV2_CPU_ISR check_MSP430XV2_CPU
+interrupt MSP430X_CPU_ISR check_MSP430X_CPU
+interrupt OA_2_ISR check_OA_2
+interrupt OA_3_ISR check_OA_3
+interrupt PMM_ISR check_PMM
+interrupt PMM_FR5xx_ISR check_PMM_FR5xx
+interrupt PMM_FRAM_ISR check_PMM_FRAM
+interrupt PORT0_ISR check_PORT0
+interrupt PORT1_ISR check_PORT1
+interrupt PORT10_ISR check_PORT10
+interrupt PORT10_R_ISR check_PORT10_R
+interrupt PORT11_R_ISR check_PORT11_R
+interrupt PORT1_MAPPING_ISR check_PORT1_MAPPING
+interrupt PORT1_R_ISR check_PORT1_R
+interrupt PORT2_ISR check_PORT2
+interrupt PORT2_MAPPING_ISR check_PORT2_MAPPING
+interrupt PORT2_R_ISR check_PORT2_R
+interrupt PORT3_ISR check_PORT3
+interrupt PORT3_MAPPING_ISR check_PORT3_MAPPING
+interrupt PORT3_R_ISR check_PORT3_R
+interrupt PORT4_ISR check_PORT4
+interrupt PORT4_MAPPING_ISR check_PORT4_MAPPING
+interrupt PORT4_R_ISR check_PORT4_R
+interrupt PORT5_ISR check_PORT5
+interrupt PORT5_R_ISR check_PORT5_R
+interrupt PORT6_ISR check_PORT6
+interrupt PORT6_R_ISR check_PORT6_R
+interrupt PORT7_ISR check_PORT7
+interrupt PORT7_R_ISR check_PORT7_R
+interrupt PORT8_ISR check_PORT8
+interrupt PORT8_R_ISR check_PORT8_R
+interrupt PORT9_ISR check_PORT9
+interrupt PORT9_R_ISR check_PORT9_R
+interrupt PORTA_ISR check_PORTA
+interrupt PORTA_R_ISR check_PORTA_R
+interrupt PORTB_ISR check_PORTB
+interrupt PORTB_R_ISR check_PORTB_R
+interrupt PORTC_R_ISR check_PORTC_R
+interrupt PORTD_R_ISR check_PORTD_R
+interrupt PORTE_R_ISR check_PORTE_R
+interrupt PORTF_R_ISR check_PORTF_R
+interrupt PORTJ_R_ISR check_PORTJ_R
+interrupt PORT_MAPPING_ISR check_PORT_MAPPING
+interrupt PU_ISR check_PU
+interrupt RC_ISR check_RC
+interrupt REF_ISR check_REF
+interrupt REF_A_ISR check_REF_A
+interrupt RTC_ISR check_RTC
+interrupt RTC_B_ISR check_RTC_B
+interrupt RTC_C_ISR check_RTC_C
+interrupt RTC_D_ISR check_RTC_D
+interrupt SCANIF_ISR check_SCANIF
+interrupt SD16_2_ISR check_SD16_2
+interrupt SD16_3_ISR check_SD16_3
+interrupt SD16_A1_ISR check_SD16_A1
+interrupt SD16_A3_ISR check_SD16_A3
+interrupt SD16_A4_ISR check_SD16_A4
+interrupt SD16_A6_ISR check_SD16_A6
+interrupt SD16_A7_ISR check_SD16_A7
+interrupt SD24_A1_ISR check_SD24_A1
+interrupt SD24_A2_ISR check_SD24_A2
+interrupt SD24_A3_ISR check_SD24_A3
+interrupt SD24_B_ISR check_SD24_B
+interrupt SD24_B2_ISR check_SD24_B2
+interrupt SD24_B3_ISR check_SD24_B3
+interrupt SD24_B4_ISR check_SD24_B4
+interrupt SD24_B6_ISR check_SD24_B6
+interrupt SD24_B7_ISR check_SD24_B7
+interrupt SFR_ISR check_SFR
+interrupt SVS_ISR check_SVS
+interrupt SYS_ISR check_SYS
+interrupt T0A3_ISR check_T0A3
+interrupt T0A5_ISR check_T0A5
+interrupt T0B3_ISR check_T0B3
+interrupt T0B7_ISR check_T0B7
+interrupt T0D3_ISR check_T0D3
+interrupt T1A2_ISR check_T1A2
+interrupt T1A3_ISR check_T1A3
+interrupt T1A5_ISR check_T1A5
+interrupt T1B3_ISR check_T1B3
+interrupt T1D3_ISR check_T1D3
+interrupt T2A2_ISR check_T2A2
+interrupt T2A3_ISR check_T2A3
+interrupt T2B3_ISR check_T2B3
+interrupt T3A2_ISR check_T3A2
+interrupt TA2_ISR check_TA2
+interrupt TA3_ISR check_TA3
+interrupt TA5_ISR check_TA5
+interrupt TB3_ISR check_TB3
+interrupt TB7_ISR check_TB7
+interrupt TEV0_ISR check_TEV0
+interrupt TEV1_ISR check_TEV1
+interrupt TLV_ISR check_TLV
+interrupt TP_ISR check_TP
+interrupt UART0_ISR check_UART0
+interrupt UART1_ISR check_UART1
+interrupt UCS_ISR check_UCS
+interrupt UCS_RF_ISR check_UCS_RF
+interrupt USB_ISR check_USB
+interrupt USCI_ISR check_USCI
+interrupt USCI_A0_ISR check_USCI_A0
+interrupt USCI_A1_ISR check_USCI_A1
+interrupt USCI_A2_ISR check_USCI_A2
+interrupt USCI_A3_ISR check_USCI_A3
+interrupt USCI_AB0_ISR check_USCI_AB0
+interrupt USCI_AB1_ISR check_USCI_AB1
+interrupt USCI_B0_ISR check_USCI_B0
+interrupt USCI_B1_ISR check_USCI_B1
+interrupt USCI_B2_ISR check_USCI_B2
+interrupt USCI_B3_ISR check_USCI_B3
+interrupt USI_ISR check_USI
+interrupt WDT_ISR check_WDT
+interrupt WDT_A_ISR check_WDT_A

@@ -1,0 +1,24 @@
+# Change Log
+
+Changes in version MS2 (milestone 2) - 2016-07-12
+  Ported interrupts, memory model and state merging from Fie
+  (msp430g2553 chip only).
+
+  * Memory model (msp430g2553/registers.cpp).
+    - Return fresh symbolics for backward symbex (as they are considered
+      global values which can change inside called functions and
+      interruptions);
+    - Return Actual values for forward symbex (interrupt handlers are
+      responsble for changing their values)
+
+  * Interrupt model (interrupts.cpp): 
+    - Add more check for ADC10 interrupts (we now check CPUOFF flag,
+      peripheral registers ADC10CTLx for specific bits to be set). 
+    - Set new value for ADC10MEM upon ADC10 interrupt
+    - Interrupts now are only executed during forward symbex.
+
+  * State mering.
+    - Check memory configuration only (and do not check if
+      path conditions are the same, this should be fixed).
+
+

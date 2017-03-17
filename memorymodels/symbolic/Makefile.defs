@@ -1,0 +1,20 @@
+DRE_ROOT=$(HOME)/Workspaces/DrE
+LLVM_ROOT=$(HOME)/Workspaces/llvm-3.4
+INC = -I$(DRE_ROOT)/include -I$(LLVM_ROOT)/include -I$(DRE_ROOT)/lib/Core
+
+all:
+	@echo "Possible targets: linux macos"
+linux:
+	rm -f libregisters.so libinterrupts.so
+	g++ -c -fPIC -o registers.o registers.cpp $(INC) -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS
+	g++ -shared -o libregisters.so registers.o -lc
+
+
+macos:
+	clang -shared -undefined dynamic_lookup $(INC) -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS  -o libregisters.so registers.cpp
+
+
+clean:
+	rm -f libregisters.so.1.0.1 libregisters.so registers.o \
+        libinterrupts.so.1.0.1 libinterrupts.so interrupts.o \
+        fake_regs.bc

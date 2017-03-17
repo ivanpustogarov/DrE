@@ -1,0 +1,1562 @@
+python ../scripts/layout_maker2.py msp430f5310 ../msp430mcu-20130321
+sfr              : ORIGIN = 0x0000, LENGTH = 0x0010 /* END=0x0010, size 16 */
+region:  sfr
+origin: 0x0000
+length: 0x0010
+attrs: 
+-------
+
+peripheral_8bit  : ORIGIN = 0x0010, LENGTH = 0x00f0 /* END=0x0100, size 240 */
+region:  peripheral_8bit
+origin: 0x0010
+length: 0x00f0
+attrs: 
+-------
+
+peripheral_16bit : ORIGIN = 0x0100, LENGTH = 0x0100 /* END=0x0200, size 256 */
+region:  peripheral_16bit
+origin: 0x0100
+length: 0x0100
+attrs: 
+-------
+
+bsl              : ORIGIN = 0x1000, LENGTH = 0x0800 /* END=0x1800, size 2K as 4 512-byte segments */
+region:  bsl
+origin: 0x1000
+length: 0x0800
+attrs: 
+-------
+
+infomem          : ORIGIN = 0x1800, LENGTH = 0x0200 /* END=0x1a00, size 512 as 4 128-byte segments */
+region:  infomem
+origin: 0x1800
+length: 0x0200
+attrs: 
+-------
+
+infod            : ORIGIN = 0x1800, LENGTH = 0x0080 /* END=0x1880, size 128 */
+region:  infod
+origin: 0x1800
+length: 0x0080
+attrs: 
+-------
+
+infoc            : ORIGIN = 0x1880, LENGTH = 0x0080 /* END=0x1900, size 128 */
+region:  infoc
+origin: 0x1880
+length: 0x0080
+attrs: 
+-------
+
+infob            : ORIGIN = 0x1900, LENGTH = 0x0080 /* END=0x1980, size 128 */
+region:  infob
+origin: 0x1900
+length: 0x0080
+attrs: 
+-------
+
+infoa            : ORIGIN = 0x1980, LENGTH = 0x0080 /* END=0x1a00, size 128 */
+region:  infoa
+origin: 0x1980
+length: 0x0080
+attrs: 
+-------
+
+ram (wx)         : ORIGIN = 0x1c00, LENGTH = 0x1800 /* END=0x3400, size 6K */
+region:  ram
+origin: 0x1c00
+length: 0x1800
+attrs: (wx)
+-------
+
+rom (rx)         : ORIGIN = 0x8000, LENGTH = 0x7f80 /* END=0xff80, size 32640 */
+region:  rom
+origin: 0x8000
+length: 0x7f80
+attrs: (rx)
+-------
+
+vectors          : ORIGIN = 0xff80, LENGTH = 0x0080 /* END=0x10000, size 128 as 64 2-byte segments */
+region:  vectors
+origin: 0xff80
+length: 0x0080
+attrs: 
+-------
+
+/* Remaining banks are absent */
+ram2 (wx)        : ORIGIN = 0x0000, LENGTH = 0x0000
+region:  ram2
+origin: 0x0000
+length: 0x0000
+attrs: (wx)
+-------
+
+ram_mirror (wx)  : ORIGIN = 0x0000, LENGTH = 0x0000
+region:  ram_mirror
+origin: 0x0000
+length: 0x0000
+attrs: (wx)
+-------
+
+signature        : ORIGIN = 0x0000, LENGTH = 0x0000
+region:  signature
+origin: 0x0000
+length: 0x0000
+attrs: 
+-------
+
+usbram (wx)      : ORIGIN = 0x0000, LENGTH = 0x0000
+region:  usbram
+origin: 0x0000
+length: 0x0000
+attrs: (wx)
+-------
+
+far_rom          : ORIGIN = 0x00000000, LENGTH = 0x00000000
+region:  far_rom
+origin: 0x00000000
+length: 0x00000000
+attrs: 
+-------
+
+out of bounds ADC10CTL0_L: 0x740
+out of bounds ADC10CTL0_H: 0x741
+out of bounds ADC10CTL0: 0x740
+out of bounds ADC10CTL1_L: 0x742
+out of bounds ADC10CTL1_H: 0x743
+out of bounds ADC10CTL1: 0x742
+out of bounds ADC10CTL2_L: 0x744
+out of bounds ADC10CTL2_H: 0x745
+out of bounds ADC10CTL2: 0x744
+out of bounds ADC10LO_L: 0x746
+out of bounds ADC10LO_H: 0x747
+out of bounds ADC10LO: 0x746
+out of bounds ADC10HI_L: 0x748
+out of bounds ADC10HI_H: 0x749
+out of bounds ADC10HI: 0x748
+out of bounds ADC10MCTL0_L: 0x74a
+out of bounds ADC10MCTL0_H: 0x74b
+out of bounds ADC10MCTL0: 0x74a
+out of bounds ADC10MEM0_L: 0x752
+out of bounds ADC10MEM0_H: 0x753
+out of bounds ADC10MEM0: 0x752
+out of bounds ADC10IE_L: 0x75a
+out of bounds ADC10IE_H: 0x75b
+out of bounds ADC10IE: 0x75a
+out of bounds ADC10IFG_L: 0x75c
+out of bounds ADC10IFG_H: 0x75d
+out of bounds ADC10IFG: 0x75c
+out of bounds ADC10IV_L: 0x75e
+out of bounds ADC10IV_H: 0x75f
+out of bounds ADC10IV: 0x75e
+out of bounds CBCTL0_L: 0x8c0
+out of bounds CBCTL0_H: 0x8c1
+out of bounds CBCTL0: 0x8c0
+out of bounds CBCTL1_L: 0x8c2
+out of bounds CBCTL1_H: 0x8c3
+out of bounds CBCTL1: 0x8c2
+out of bounds CBCTL2_L: 0x8c4
+out of bounds CBCTL2_H: 0x8c5
+out of bounds CBCTL2: 0x8c4
+out of bounds CBCTL3_L: 0x8c6
+out of bounds CBCTL3_H: 0x8c7
+out of bounds CBCTL3: 0x8c6
+out of bounds CBINT_L: 0x8cc
+out of bounds CBINT_H: 0x8cd
+out of bounds CBINT: 0x8cc
+out of bounds CBIV: 0x8ce
+out of bounds DMACTL0_L: 0x500
+out of bounds DMACTL0_H: 0x501
+out of bounds DMACTL0: 0x500
+out of bounds DMACTL1_L: 0x502
+out of bounds DMACTL1_H: 0x503
+out of bounds DMACTL1: 0x502
+out of bounds DMACTL2_L: 0x504
+out of bounds DMACTL2_H: 0x505
+out of bounds DMACTL2: 0x504
+out of bounds DMACTL3_L: 0x506
+out of bounds DMACTL3_H: 0x507
+out of bounds DMACTL3: 0x506
+out of bounds DMACTL4_L: 0x508
+out of bounds DMACTL4_H: 0x509
+out of bounds DMACTL4: 0x508
+out of bounds DMAIV_L: 0x50e
+out of bounds DMAIV_H: 0x50f
+out of bounds DMAIV: 0x50e
+out of bounds DMA0CTL_L: 0x510
+out of bounds DMA0CTL_H: 0x511
+out of bounds DMA0CTL: 0x510
+out of bounds DMA0SA: 0x512
+out of bounds DMA0DA: 0x516
+out of bounds DMA0SZ: 0x51a
+out of bounds DMA1CTL_L: 0x520
+out of bounds DMA1CTL_H: 0x521
+out of bounds DMA1CTL: 0x520
+out of bounds DMA1SA: 0x522
+out of bounds DMA1DA: 0x526
+out of bounds DMA1SZ: 0x52a
+out of bounds DMA2CTL_L: 0x530
+out of bounds DMA2CTL_H: 0x531
+out of bounds DMA2CTL: 0x530
+out of bounds DMA2SA: 0x532
+out of bounds DMA2DA: 0x536
+out of bounds DMA2SZ: 0x53a
+out of bounds MPY_L: 0x4c0
+out of bounds MPY_H: 0x4c1
+out of bounds MPY: 0x4c0
+out of bounds MPYS_L: 0x4c2
+out of bounds MPYS_H: 0x4c3
+out of bounds MPYS: 0x4c2
+out of bounds MAC_L: 0x4c4
+out of bounds MAC_H: 0x4c5
+out of bounds MAC: 0x4c4
+out of bounds MACS_L: 0x4c6
+out of bounds MACS_H: 0x4c7
+out of bounds MACS: 0x4c6
+out of bounds OP2_L: 0x4c8
+out of bounds OP2_H: 0x4c9
+out of bounds OP2: 0x4c8
+out of bounds RESLO_L: 0x4ca
+out of bounds RESLO_H: 0x4cb
+out of bounds RESLO: 0x4ca
+out of bounds RESHI_L: 0x4cc
+out of bounds RESHI_H: 0x4cd
+out of bounds RESHI: 0x4cc
+out of bounds SUMEXT_L: 0x4ce
+out of bounds SUMEXT_H: 0x4cf
+out of bounds SUMEXT: 0x4ce
+out of bounds MPY32L_L: 0x4d0
+out of bounds MPY32L_H: 0x4d1
+out of bounds MPY32L: 0x4d0
+out of bounds MPY32H_L: 0x4d2
+out of bounds MPY32H_H: 0x4d3
+out of bounds MPY32H: 0x4d2
+out of bounds MPYS32L_L: 0x4d4
+out of bounds MPYS32L_H: 0x4d5
+out of bounds MPYS32L: 0x4d4
+out of bounds MPYS32H_L: 0x4d6
+out of bounds MPYS32H_H: 0x4d7
+out of bounds MPYS32H: 0x4d6
+out of bounds MAC32L_L: 0x4d8
+out of bounds MAC32L_H: 0x4d9
+out of bounds MAC32L: 0x4d8
+out of bounds MAC32H_L: 0x4da
+out of bounds MAC32H_H: 0x4db
+out of bounds MAC32H: 0x4da
+out of bounds MACS32L_L: 0x4dc
+out of bounds MACS32L_H: 0x4dd
+out of bounds MACS32L: 0x4dc
+out of bounds MACS32H_L: 0x4de
+out of bounds MACS32H_H: 0x4df
+out of bounds MACS32H: 0x4de
+out of bounds OP2L_L: 0x4e0
+out of bounds OP2L_H: 0x4e1
+out of bounds OP2L: 0x4e0
+out of bounds OP2H_L: 0x4e2
+out of bounds OP2H_H: 0x4e3
+out of bounds OP2H: 0x4e2
+out of bounds RES0_L: 0x4e4
+out of bounds RES0_H: 0x4e5
+out of bounds RES0: 0x4e4
+out of bounds RES1_L: 0x4e6
+out of bounds RES1_H: 0x4e7
+out of bounds RES1: 0x4e6
+out of bounds RES2_L: 0x4e8
+out of bounds RES2_H: 0x4e9
+out of bounds RES2: 0x4e8
+out of bounds RES3_L: 0x4ea
+out of bounds RES3_H: 0x4eb
+out of bounds RES3: 0x4ea
+out of bounds MPY32CTL0_L: 0x4ec
+out of bounds MPY32CTL0_H: 0x4ed
+out of bounds MPY32CTL0: 0x4ec
+out of bounds PAIN_L: 0x200
+out of bounds PAIN_H: 0x201
+out of bounds PAIN: 0x200
+out of bounds PAOUT_L: 0x202
+out of bounds PAOUT_H: 0x203
+out of bounds PAOUT: 0x202
+out of bounds PADIR_L: 0x204
+out of bounds PADIR_H: 0x205
+out of bounds PADIR: 0x204
+out of bounds PAREN_L: 0x206
+out of bounds PAREN_H: 0x207
+out of bounds PAREN: 0x206
+out of bounds PADS_L: 0x208
+out of bounds PADS_H: 0x209
+out of bounds PADS: 0x208
+out of bounds PASEL_L: 0x20a
+out of bounds PASEL_H: 0x20b
+out of bounds PASEL: 0x20a
+out of bounds PAIES_L: 0x218
+out of bounds PAIES_H: 0x219
+out of bounds PAIES: 0x218
+out of bounds PAIE_L: 0x21a
+out of bounds PAIE_H: 0x21b
+out of bounds PAIE: 0x21a
+out of bounds PAIFG_L: 0x21c
+out of bounds PAIFG_H: 0x21d
+out of bounds PAIFG: 0x21c
+out of bounds P1IV: 0x20e
+out of bounds P2IV: 0x21e
+out of bounds PBIN_L: 0x220
+out of bounds PBIN_H: 0x221
+out of bounds PBIN: 0x220
+out of bounds PBOUT_L: 0x222
+out of bounds PBOUT_H: 0x223
+out of bounds PBOUT: 0x222
+out of bounds PBDIR_L: 0x224
+out of bounds PBDIR_H: 0x225
+out of bounds PBDIR: 0x224
+out of bounds PBREN_L: 0x226
+out of bounds PBREN_H: 0x227
+out of bounds PBREN: 0x226
+out of bounds PBDS_L: 0x228
+out of bounds PBDS_H: 0x229
+out of bounds PBDS: 0x228
+out of bounds PBSEL_L: 0x22a
+out of bounds PBSEL_H: 0x22b
+out of bounds PBSEL: 0x22a
+out of bounds PCIN_L: 0x240
+out of bounds PCIN_H: 0x241
+out of bounds PCIN: 0x240
+out of bounds PCOUT_L: 0x242
+out of bounds PCOUT_H: 0x243
+out of bounds PCOUT: 0x242
+out of bounds PCDIR_L: 0x244
+out of bounds PCDIR_H: 0x245
+out of bounds PCDIR: 0x244
+out of bounds PCREN_L: 0x246
+out of bounds PCREN_H: 0x247
+out of bounds PCREN: 0x246
+out of bounds PCDS_L: 0x248
+out of bounds PCDS_H: 0x249
+out of bounds PCDS: 0x248
+out of bounds PCSEL_L: 0x24a
+out of bounds PCSEL_H: 0x24b
+out of bounds PCSEL: 0x24a
+out of bounds PJIN_L: 0x320
+out of bounds PJIN_H: 0x321
+out of bounds PJIN: 0x320
+out of bounds PJOUT_L: 0x322
+out of bounds PJOUT_H: 0x323
+out of bounds PJOUT: 0x322
+out of bounds PJDIR_L: 0x324
+out of bounds PJDIR_H: 0x325
+out of bounds PJDIR: 0x324
+out of bounds PJREN_L: 0x326
+out of bounds PJREN_H: 0x327
+out of bounds PJREN: 0x326
+out of bounds PJDS_L: 0x328
+out of bounds PJDS_H: 0x329
+out of bounds PJDS: 0x328
+out of bounds LDOKEYPID_L: 0x900
+out of bounds LDOKEYPID_H: 0x901
+out of bounds LDOKEYPID: 0x900
+out of bounds PUCTL_L: 0x904
+out of bounds PUCTL_H: 0x905
+out of bounds PUCTL: 0x904
+out of bounds LDOPWRCTL_L: 0x908
+out of bounds LDOPWRCTL_H: 0x909
+out of bounds LDOPWRCTL: 0x908
+out of bounds RTCCTL01_L: 0x4a0
+out of bounds RTCCTL01_H: 0x4a1
+out of bounds RTCCTL01: 0x4a0
+out of bounds RTCCTL23_L: 0x4a2
+out of bounds RTCCTL23_H: 0x4a3
+out of bounds RTCCTL23: 0x4a2
+out of bounds RTCPS0CTL_L: 0x4a8
+out of bounds RTCPS0CTL_H: 0x4a9
+out of bounds RTCPS0CTL: 0x4a8
+out of bounds RTCPS1CTL_L: 0x4aa
+out of bounds RTCPS1CTL_H: 0x4ab
+out of bounds RTCPS1CTL: 0x4aa
+out of bounds RTCPS_L: 0x4ac
+out of bounds RTCPS_H: 0x4ad
+out of bounds RTCPS: 0x4ac
+out of bounds RTCIV: 0x4ae
+out of bounds RTCTIM0_L: 0x4b0
+out of bounds RTCTIM0_H: 0x4b1
+out of bounds RTCTIM0: 0x4b0
+out of bounds RTCTIM1_L: 0x4b2
+out of bounds RTCTIM1_H: 0x4b3
+out of bounds RTCTIM1: 0x4b2
+out of bounds RTCDATE_L: 0x4b4
+out of bounds RTCDATE_H: 0x4b5
+out of bounds RTCDATE: 0x4b4
+out of bounds RTCYEAR_L: 0x4b6
+out of bounds RTCYEAR_H: 0x4b7
+out of bounds RTCYEAR: 0x4b6
+out of bounds RTCAMINHR_L: 0x4b8
+out of bounds RTCAMINHR_H: 0x4b9
+out of bounds RTCAMINHR: 0x4b8
+out of bounds RTCADOWDAY_L: 0x4ba
+out of bounds RTCADOWDAY_H: 0x4bb
+out of bounds RTCADOWDAY: 0x4ba
+out of bounds TA0CTL: 0x340
+out of bounds TA0CCTL0: 0x342
+out of bounds TA0CCTL1: 0x344
+out of bounds TA0CCTL2: 0x346
+out of bounds TA0CCTL3: 0x348
+out of bounds TA0CCTL4: 0x34a
+out of bounds TA0R: 0x350
+out of bounds TA0CCR0: 0x352
+out of bounds TA0CCR1: 0x354
+out of bounds TA0CCR2: 0x356
+out of bounds TA0CCR3: 0x358
+out of bounds TA0CCR4: 0x35a
+out of bounds TA0IV: 0x36e
+out of bounds TA0EX0: 0x360
+out of bounds TA1CTL: 0x380
+out of bounds TA1CCTL0: 0x382
+out of bounds TA1CCTL1: 0x384
+out of bounds TA1CCTL2: 0x386
+out of bounds TA1R: 0x390
+out of bounds TA1CCR0: 0x392
+out of bounds TA1CCR1: 0x394
+out of bounds TA1CCR2: 0x396
+out of bounds TA1IV: 0x3ae
+out of bounds TA1EX0: 0x3a0
+out of bounds TA2CTL: 0x400
+out of bounds TA2CCTL0: 0x402
+out of bounds TA2CCTL1: 0x404
+out of bounds TA2CCTL2: 0x406
+out of bounds TA2R: 0x410
+out of bounds TA2CCR0: 0x412
+out of bounds TA2CCR1: 0x414
+out of bounds TA2CCR2: 0x416
+out of bounds TA2IV: 0x42e
+out of bounds TA2EX0: 0x420
+out of bounds TB0CTL: 0x3c0
+out of bounds TB0CCTL0: 0x3c2
+out of bounds TB0CCTL1: 0x3c4
+out of bounds TB0CCTL2: 0x3c6
+out of bounds TB0CCTL3: 0x3c8
+out of bounds TB0CCTL4: 0x3ca
+out of bounds TB0CCTL5: 0x3cc
+out of bounds TB0CCTL6: 0x3ce
+out of bounds TB0R: 0x3d0
+out of bounds TB0CCR0: 0x3d2
+out of bounds TB0CCR1: 0x3d4
+out of bounds TB0CCR2: 0x3d6
+out of bounds TB0CCR3: 0x3d8
+out of bounds TB0CCR4: 0x3da
+out of bounds TB0CCR5: 0x3dc
+out of bounds TB0CCR6: 0x3de
+out of bounds TB0EX0: 0x3e0
+out of bounds TB0IV: 0x3ee
+out of bounds UCA0CTLW0_L: 0x5c0
+out of bounds UCA0CTLW0_H: 0x5c1
+out of bounds UCA0CTLW0: 0x5c0
+out of bounds UCA0BRW_L: 0x5c6
+out of bounds UCA0BRW_H: 0x5c7
+out of bounds UCA0BRW: 0x5c6
+out of bounds UCA0MCTL: 0x5c8
+out of bounds UCA0STAT: 0x5ca
+out of bounds UCA0RXBUF: 0x5cc
+out of bounds UCA0TXBUF: 0x5ce
+out of bounds UCA0ABCTL: 0x5d0
+out of bounds UCA0IRCTL_L: 0x5d2
+out of bounds UCA0IRCTL_H: 0x5d3
+out of bounds UCA0IRCTL: 0x5d2
+out of bounds UCA0ICTL_L: 0x5dc
+out of bounds UCA0ICTL_H: 0x5dd
+out of bounds UCA0ICTL: 0x5dc
+out of bounds UCA0IV: 0x5de
+out of bounds UCB0CTLW0_L: 0x5e0
+out of bounds UCB0CTLW0_H: 0x5e1
+out of bounds UCB0CTLW0: 0x5e0
+out of bounds UCB0BRW_L: 0x5e6
+out of bounds UCB0BRW_H: 0x5e7
+out of bounds UCB0BRW: 0x5e6
+out of bounds UCB0STAT: 0x5ea
+out of bounds UCB0RXBUF: 0x5ec
+out of bounds UCB0TXBUF: 0x5ee
+out of bounds UCB0I2COA_L: 0x5f0
+out of bounds UCB0I2COA_H: 0x5f1
+out of bounds UCB0I2COA: 0x5f0
+out of bounds UCB0I2CSA_L: 0x5f2
+out of bounds UCB0I2CSA_H: 0x5f3
+out of bounds UCB0I2CSA: 0x5f2
+out of bounds UCB0ICTL_L: 0x5fc
+out of bounds UCB0ICTL_H: 0x5fd
+out of bounds UCB0ICTL: 0x5fc
+out of bounds UCB0IV: 0x5fe
+out of bounds UCA1CTLW0_L: 0x600
+out of bounds UCA1CTLW0_H: 0x601
+out of bounds UCA1CTLW0: 0x600
+out of bounds UCA1BRW_L: 0x606
+out of bounds UCA1BRW_H: 0x607
+out of bounds UCA1BRW: 0x606
+out of bounds UCA1MCTL: 0x608
+out of bounds UCA1STAT: 0x60a
+out of bounds UCA1RXBUF: 0x60c
+out of bounds UCA1TXBUF: 0x60e
+out of bounds UCA1ABCTL: 0x610
+out of bounds UCA1IRCTL_L: 0x612
+out of bounds UCA1IRCTL_H: 0x613
+out of bounds UCA1IRCTL: 0x612
+out of bounds UCA1ICTL_L: 0x61c
+out of bounds UCA1ICTL_H: 0x61d
+out of bounds UCA1ICTL: 0x61c
+out of bounds UCA1IV: 0x61e
+out of bounds UCB1CTLW0_L: 0x620
+out of bounds UCB1CTLW0_H: 0x621
+out of bounds UCB1CTLW0: 0x620
+out of bounds UCB1BRW_L: 0x626
+out of bounds UCB1BRW_H: 0x627
+out of bounds UCB1BRW: 0x626
+out of bounds UCB1STAT: 0x62a
+out of bounds UCB1RXBUF: 0x62c
+out of bounds UCB1TXBUF: 0x62e
+out of bounds UCB1I2COA_L: 0x630
+out of bounds UCB1I2COA_H: 0x631
+out of bounds UCB1I2COA: 0x630
+out of bounds UCB1I2CSA_L: 0x632
+out of bounds UCB1I2CSA_H: 0x633
+out of bounds UCB1I2CSA: 0x632
+out of bounds UCB1ICTL_L: 0x63c
+out of bounds UCB1ICTL_H: 0x63d
+out of bounds UCB1ICTL: 0x63c
+out of bounds UCB1IV: 0x63e
+python ../scripts/header_maker.py ../msp430mcu-20130321/upstream/msp430f5310.h
+no aux layout, using empty
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+found an sfrb
+python ../common/dummy_funs.py
+junk line layout 0x10000
+ignoring directive "range"
+ignoring directive "range"
+ignoring directive "range"
+ignoring directive "range"
+ignoring directive "range"
+register ADC10CTL0_L at 0x0740 of 1 bytes
+register ADC10CTL0_H at 0x0741 of 1 bytes
+register ADC10CTL0 at 0x0740 of 1 bytes
+register ADC10CTL1_L at 0x0742 of 1 bytes
+register ADC10CTL1_H at 0x0743 of 1 bytes
+register ADC10CTL1 at 0x0742 of 1 bytes
+register ADC10CTL2_L at 0x0744 of 1 bytes
+register ADC10CTL2_H at 0x0745 of 1 bytes
+register ADC10CTL2 at 0x0744 of 1 bytes
+register ADC10LO_L at 0x0746 of 1 bytes
+register ADC10LO_H at 0x0747 of 1 bytes
+register ADC10LO at 0x0746 of 1 bytes
+register ADC10HI_L at 0x0748 of 1 bytes
+register ADC10HI_H at 0x0749 of 1 bytes
+register ADC10HI at 0x0748 of 1 bytes
+register ADC10MCTL0_L at 0x074a of 1 bytes
+register ADC10MCTL0_H at 0x074b of 1 bytes
+register ADC10MCTL0 at 0x074a of 1 bytes
+register ADC10MEM0_L at 0x0752 of 1 bytes
+register ADC10MEM0_H at 0x0753 of 1 bytes
+register ADC10MEM0 at 0x0752 of 1 bytes
+register ADC10IE_L at 0x075a of 1 bytes
+register ADC10IE_H at 0x075b of 1 bytes
+register ADC10IE at 0x075a of 1 bytes
+register ADC10IFG_L at 0x075c of 1 bytes
+register ADC10IFG_H at 0x075d of 1 bytes
+register ADC10IFG at 0x075c of 1 bytes
+register ADC10IV_L at 0x075e of 1 bytes
+register ADC10IV_H at 0x075f of 1 bytes
+register ADC10IV at 0x075e of 1 bytes
+register CBCTL0_L at 0x08c0 of 1 bytes
+register CBCTL0_H at 0x08c1 of 1 bytes
+register CBCTL0 at 0x08c0 of 1 bytes
+register CBCTL1_L at 0x08c2 of 1 bytes
+register CBCTL1_H at 0x08c3 of 1 bytes
+register CBCTL1 at 0x08c2 of 1 bytes
+register CBCTL2_L at 0x08c4 of 1 bytes
+register CBCTL2_H at 0x08c5 of 1 bytes
+register CBCTL2 at 0x08c4 of 1 bytes
+register CBCTL3_L at 0x08c6 of 1 bytes
+register CBCTL3_H at 0x08c7 of 1 bytes
+register CBCTL3 at 0x08c6 of 1 bytes
+register CBINT_L at 0x08cc of 1 bytes
+register CBINT_H at 0x08cd of 1 bytes
+register CBINT at 0x08cc of 1 bytes
+register CBIV at 0x08ce of 1 bytes
+register CRCDI_L at 0x0150 of 2 bytes
+register CRCDI_H at 0x0151 of 2 bytes
+register CRCDI at 0x0150 of 2 bytes
+register CRCDIRB_L at 0x0152 of 2 bytes
+register CRCDIRB_H at 0x0153 of 2 bytes
+register CRCDIRB at 0x0152 of 2 bytes
+register CRCINIRES_L at 0x0154 of 2 bytes
+register CRCINIRES_H at 0x0155 of 2 bytes
+register CRCINIRES at 0x0154 of 2 bytes
+register CRCRESR_L at 0x0156 of 2 bytes
+register CRCRESR_H at 0x0157 of 2 bytes
+register CRCRESR at 0x0156 of 2 bytes
+register DMACTL0_L at 0x0500 of 1 bytes
+register DMACTL0_H at 0x0501 of 1 bytes
+register DMACTL0 at 0x0500 of 1 bytes
+register DMACTL1_L at 0x0502 of 1 bytes
+register DMACTL1_H at 0x0503 of 1 bytes
+register DMACTL1 at 0x0502 of 1 bytes
+register DMACTL2_L at 0x0504 of 1 bytes
+register DMACTL2_H at 0x0505 of 1 bytes
+register DMACTL2 at 0x0504 of 1 bytes
+register DMACTL3_L at 0x0506 of 1 bytes
+register DMACTL3_H at 0x0507 of 1 bytes
+register DMACTL3 at 0x0506 of 1 bytes
+register DMACTL4_L at 0x0508 of 1 bytes
+register DMACTL4_H at 0x0509 of 1 bytes
+register DMACTL4 at 0x0508 of 1 bytes
+register DMAIV_L at 0x050e of 1 bytes
+register DMAIV_H at 0x050f of 1 bytes
+register DMAIV at 0x050e of 1 bytes
+register DMA0CTL_L at 0x0510 of 1 bytes
+register DMA0CTL_H at 0x0511 of 1 bytes
+register DMA0CTL at 0x0510 of 1 bytes
+register DMA0SA at 0x0512 of 1 bytes
+register DMA0DA at 0x0516 of 1 bytes
+register DMA0SZ at 0x051a of 1 bytes
+register DMA1CTL_L at 0x0520 of 1 bytes
+register DMA1CTL_H at 0x0521 of 1 bytes
+register DMA1CTL at 0x0520 of 1 bytes
+register DMA1SA at 0x0522 of 1 bytes
+register DMA1DA at 0x0526 of 1 bytes
+register DMA1SZ at 0x052a of 1 bytes
+register DMA2CTL_L at 0x0530 of 1 bytes
+register DMA2CTL_H at 0x0531 of 1 bytes
+register DMA2CTL at 0x0530 of 1 bytes
+register DMA2SA at 0x0532 of 1 bytes
+register DMA2DA at 0x0536 of 1 bytes
+register DMA2SZ at 0x053a of 1 bytes
+register FCTL1_L at 0x0140 of 2 bytes
+register FCTL1_H at 0x0141 of 2 bytes
+register FCTL1 at 0x0140 of 2 bytes
+register FCTL3_L at 0x0144 of 2 bytes
+register FCTL3_H at 0x0145 of 2 bytes
+register FCTL3 at 0x0144 of 2 bytes
+register FCTL4_L at 0x0146 of 2 bytes
+register FCTL4_H at 0x0147 of 2 bytes
+register FCTL4 at 0x0146 of 2 bytes
+register MPY_L at 0x04c0 of 1 bytes
+register MPY_H at 0x04c1 of 1 bytes
+register MPY at 0x04c0 of 1 bytes
+register MPYS_L at 0x04c2 of 1 bytes
+register MPYS_H at 0x04c3 of 1 bytes
+register MPYS at 0x04c2 of 1 bytes
+register MAC_L at 0x04c4 of 1 bytes
+register MAC_H at 0x04c5 of 1 bytes
+register MAC at 0x04c4 of 1 bytes
+register MACS_L at 0x04c6 of 1 bytes
+register MACS_H at 0x04c7 of 1 bytes
+register MACS at 0x04c6 of 1 bytes
+register OP2_L at 0x04c8 of 1 bytes
+register OP2_H at 0x04c9 of 1 bytes
+register OP2 at 0x04c8 of 1 bytes
+register RESLO_L at 0x04ca of 1 bytes
+register RESLO_H at 0x04cb of 1 bytes
+register RESLO at 0x04ca of 1 bytes
+register RESHI_L at 0x04cc of 1 bytes
+register RESHI_H at 0x04cd of 1 bytes
+register RESHI at 0x04cc of 1 bytes
+register SUMEXT_L at 0x04ce of 1 bytes
+register SUMEXT_H at 0x04cf of 1 bytes
+register SUMEXT at 0x04ce of 1 bytes
+register MPY32L_L at 0x04d0 of 1 bytes
+register MPY32L_H at 0x04d1 of 1 bytes
+register MPY32L at 0x04d0 of 1 bytes
+register MPY32H_L at 0x04d2 of 1 bytes
+register MPY32H_H at 0x04d3 of 1 bytes
+register MPY32H at 0x04d2 of 1 bytes
+register MPYS32L_L at 0x04d4 of 1 bytes
+register MPYS32L_H at 0x04d5 of 1 bytes
+register MPYS32L at 0x04d4 of 1 bytes
+register MPYS32H_L at 0x04d6 of 1 bytes
+register MPYS32H_H at 0x04d7 of 1 bytes
+register MPYS32H at 0x04d6 of 1 bytes
+register MAC32L_L at 0x04d8 of 1 bytes
+register MAC32L_H at 0x04d9 of 1 bytes
+register MAC32L at 0x04d8 of 1 bytes
+register MAC32H_L at 0x04da of 1 bytes
+register MAC32H_H at 0x04db of 1 bytes
+register MAC32H at 0x04da of 1 bytes
+register MACS32L_L at 0x04dc of 1 bytes
+register MACS32L_H at 0x04dd of 1 bytes
+register MACS32L at 0x04dc of 1 bytes
+register MACS32H_L at 0x04de of 1 bytes
+register MACS32H_H at 0x04df of 1 bytes
+register MACS32H at 0x04de of 1 bytes
+register OP2L_L at 0x04e0 of 1 bytes
+register OP2L_H at 0x04e1 of 1 bytes
+register OP2L at 0x04e0 of 1 bytes
+register OP2H_L at 0x04e2 of 1 bytes
+register OP2H_H at 0x04e3 of 1 bytes
+register OP2H at 0x04e2 of 1 bytes
+register RES0_L at 0x04e4 of 1 bytes
+register RES0_H at 0x04e5 of 1 bytes
+register RES0 at 0x04e4 of 1 bytes
+register RES1_L at 0x04e6 of 1 bytes
+register RES1_H at 0x04e7 of 1 bytes
+register RES1 at 0x04e6 of 1 bytes
+register RES2_L at 0x04e8 of 1 bytes
+register RES2_H at 0x04e9 of 1 bytes
+register RES2 at 0x04e8 of 1 bytes
+register RES3_L at 0x04ea of 1 bytes
+register RES3_H at 0x04eb of 1 bytes
+register RES3 at 0x04ea of 1 bytes
+register MPY32CTL0_L at 0x04ec of 1 bytes
+register MPY32CTL0_H at 0x04ed of 1 bytes
+register MPY32CTL0 at 0x04ec of 1 bytes
+register PAIN_L at 0x0200 of 1 bytes
+register PAIN_H at 0x0201 of 1 bytes
+register PAIN at 0x0200 of 1 bytes
+register PAOUT_L at 0x0202 of 1 bytes
+register PAOUT_H at 0x0203 of 1 bytes
+register PAOUT at 0x0202 of 1 bytes
+register PADIR_L at 0x0204 of 1 bytes
+register PADIR_H at 0x0205 of 1 bytes
+register PADIR at 0x0204 of 1 bytes
+register PAREN_L at 0x0206 of 1 bytes
+register PAREN_H at 0x0207 of 1 bytes
+register PAREN at 0x0206 of 1 bytes
+register PADS_L at 0x0208 of 1 bytes
+register PADS_H at 0x0209 of 1 bytes
+register PADS at 0x0208 of 1 bytes
+register PASEL_L at 0x020a of 1 bytes
+register PASEL_H at 0x020b of 1 bytes
+register PASEL at 0x020a of 1 bytes
+register PAIES_L at 0x0218 of 1 bytes
+register PAIES_H at 0x0219 of 1 bytes
+register PAIES at 0x0218 of 1 bytes
+register PAIE_L at 0x021a of 1 bytes
+register PAIE_H at 0x021b of 1 bytes
+register PAIE at 0x021a of 1 bytes
+register PAIFG_L at 0x021c of 1 bytes
+register PAIFG_H at 0x021d of 1 bytes
+register PAIFG at 0x021c of 1 bytes
+register P1IV at 0x020e of 1 bytes
+register P2IV at 0x021e of 1 bytes
+register PBIN_L at 0x0220 of 1 bytes
+register PBIN_H at 0x0221 of 1 bytes
+register PBIN at 0x0220 of 1 bytes
+register PBOUT_L at 0x0222 of 1 bytes
+register PBOUT_H at 0x0223 of 1 bytes
+register PBOUT at 0x0222 of 1 bytes
+register PBDIR_L at 0x0224 of 1 bytes
+register PBDIR_H at 0x0225 of 1 bytes
+register PBDIR at 0x0224 of 1 bytes
+register PBREN_L at 0x0226 of 1 bytes
+register PBREN_H at 0x0227 of 1 bytes
+register PBREN at 0x0226 of 1 bytes
+register PBDS_L at 0x0228 of 1 bytes
+register PBDS_H at 0x0229 of 1 bytes
+register PBDS at 0x0228 of 1 bytes
+register PBSEL_L at 0x022a of 1 bytes
+register PBSEL_H at 0x022b of 1 bytes
+register PBSEL at 0x022a of 1 bytes
+register PCIN_L at 0x0240 of 1 bytes
+register PCIN_H at 0x0241 of 1 bytes
+register PCIN at 0x0240 of 1 bytes
+register PCOUT_L at 0x0242 of 1 bytes
+register PCOUT_H at 0x0243 of 1 bytes
+register PCOUT at 0x0242 of 1 bytes
+register PCDIR_L at 0x0244 of 1 bytes
+register PCDIR_H at 0x0245 of 1 bytes
+register PCDIR at 0x0244 of 1 bytes
+register PCREN_L at 0x0246 of 1 bytes
+register PCREN_H at 0x0247 of 1 bytes
+register PCREN at 0x0246 of 1 bytes
+register PCDS_L at 0x0248 of 1 bytes
+register PCDS_H at 0x0249 of 1 bytes
+register PCDS at 0x0248 of 1 bytes
+register PCSEL_L at 0x024a of 1 bytes
+register PCSEL_H at 0x024b of 1 bytes
+register PCSEL at 0x024a of 1 bytes
+register PJIN_L at 0x0320 of 1 bytes
+register PJIN_H at 0x0321 of 1 bytes
+register PJIN at 0x0320 of 1 bytes
+register PJOUT_L at 0x0322 of 1 bytes
+register PJOUT_H at 0x0323 of 1 bytes
+register PJOUT at 0x0322 of 1 bytes
+register PJDIR_L at 0x0324 of 1 bytes
+register PJDIR_H at 0x0325 of 1 bytes
+register PJDIR at 0x0324 of 1 bytes
+register PJREN_L at 0x0326 of 1 bytes
+register PJREN_H at 0x0327 of 1 bytes
+register PJREN at 0x0326 of 1 bytes
+register PJDS_L at 0x0328 of 1 bytes
+register PJDS_H at 0x0329 of 1 bytes
+register PJDS at 0x0328 of 1 bytes
+register LDOKEYPID_L at 0x0900 of 1 bytes
+register LDOKEYPID_H at 0x0901 of 1 bytes
+register LDOKEYPID at 0x0900 of 1 bytes
+register PUCTL_L at 0x0904 of 1 bytes
+register PUCTL_H at 0x0905 of 1 bytes
+register PUCTL at 0x0904 of 1 bytes
+register LDOPWRCTL_L at 0x0908 of 1 bytes
+register LDOPWRCTL_H at 0x0909 of 1 bytes
+register LDOPWRCTL at 0x0908 of 1 bytes
+register PMAPKEYID_L at 0x01c0 of 2 bytes
+register PMAPKEYID_H at 0x01c1 of 2 bytes
+register PMAPKEYID at 0x01c0 of 2 bytes
+register PMAPCTL_L at 0x01c2 of 2 bytes
+register PMAPCTL_H at 0x01c3 of 2 bytes
+register PMAPCTL at 0x01c2 of 2 bytes
+register P4MAP01_L at 0x01e0 of 2 bytes
+register P4MAP01_H at 0x01e1 of 2 bytes
+register P4MAP01 at 0x01e0 of 2 bytes
+register P4MAP23_L at 0x01e2 of 2 bytes
+register P4MAP23_H at 0x01e3 of 2 bytes
+register P4MAP23 at 0x01e2 of 2 bytes
+register P4MAP45_L at 0x01e4 of 2 bytes
+register P4MAP45_H at 0x01e5 of 2 bytes
+register P4MAP45 at 0x01e4 of 2 bytes
+register P4MAP67_L at 0x01e6 of 2 bytes
+register P4MAP67_H at 0x01e7 of 2 bytes
+register P4MAP67 at 0x01e6 of 2 bytes
+register PMMCTL0_L at 0x0120 of 2 bytes
+register PMMCTL0_H at 0x0121 of 2 bytes
+register PMMCTL0 at 0x0120 of 2 bytes
+register PMMCTL1_L at 0x0122 of 2 bytes
+register PMMCTL1_H at 0x0123 of 2 bytes
+register PMMCTL1 at 0x0122 of 2 bytes
+register SVSMHCTL_L at 0x0124 of 2 bytes
+register SVSMHCTL_H at 0x0125 of 2 bytes
+register SVSMHCTL at 0x0124 of 2 bytes
+register SVSMLCTL_L at 0x0126 of 2 bytes
+register SVSMLCTL_H at 0x0127 of 2 bytes
+register SVSMLCTL at 0x0126 of 2 bytes
+register SVSMIO_L at 0x0128 of 2 bytes
+register SVSMIO_H at 0x0129 of 2 bytes
+register SVSMIO at 0x0128 of 2 bytes
+register PMMIFG_L at 0x012c of 2 bytes
+register PMMIFG_H at 0x012d of 2 bytes
+register PMMIFG at 0x012c of 2 bytes
+register PMMRIE_L at 0x012e of 2 bytes
+register PMMRIE_H at 0x012f of 2 bytes
+register PMMRIE at 0x012e of 2 bytes
+register PM5CTL0_L at 0x0130 of 2 bytes
+register PM5CTL0_H at 0x0131 of 2 bytes
+register PM5CTL0 at 0x0130 of 2 bytes
+register RCCTL0_L at 0x0158 of 2 bytes
+register RCCTL0_H at 0x0159 of 2 bytes
+register RCCTL0 at 0x0158 of 2 bytes
+register REFCTL0_L at 0x01b0 of 2 bytes
+register REFCTL0_H at 0x01b1 of 2 bytes
+register REFCTL0 at 0x01b0 of 2 bytes
+register RTCCTL01_L at 0x04a0 of 1 bytes
+register RTCCTL01_H at 0x04a1 of 1 bytes
+register RTCCTL01 at 0x04a0 of 1 bytes
+register RTCCTL23_L at 0x04a2 of 1 bytes
+register RTCCTL23_H at 0x04a3 of 1 bytes
+register RTCCTL23 at 0x04a2 of 1 bytes
+register RTCPS0CTL_L at 0x04a8 of 1 bytes
+register RTCPS0CTL_H at 0x04a9 of 1 bytes
+register RTCPS0CTL at 0x04a8 of 1 bytes
+register RTCPS1CTL_L at 0x04aa of 1 bytes
+register RTCPS1CTL_H at 0x04ab of 1 bytes
+register RTCPS1CTL at 0x04aa of 1 bytes
+register RTCPS_L at 0x04ac of 1 bytes
+register RTCPS_H at 0x04ad of 1 bytes
+register RTCPS at 0x04ac of 1 bytes
+register RTCIV at 0x04ae of 1 bytes
+register RTCTIM0_L at 0x04b0 of 1 bytes
+register RTCTIM0_H at 0x04b1 of 1 bytes
+register RTCTIM0 at 0x04b0 of 1 bytes
+register RTCTIM1_L at 0x04b2 of 1 bytes
+register RTCTIM1_H at 0x04b3 of 1 bytes
+register RTCTIM1 at 0x04b2 of 1 bytes
+register RTCDATE_L at 0x04b4 of 1 bytes
+register RTCDATE_H at 0x04b5 of 1 bytes
+register RTCDATE at 0x04b4 of 1 bytes
+register RTCYEAR_L at 0x04b6 of 1 bytes
+register RTCYEAR_H at 0x04b7 of 1 bytes
+register RTCYEAR at 0x04b6 of 1 bytes
+register RTCAMINHR_L at 0x04b8 of 1 bytes
+register RTCAMINHR_H at 0x04b9 of 1 bytes
+register RTCAMINHR at 0x04b8 of 1 bytes
+register RTCADOWDAY_L at 0x04ba of 1 bytes
+register RTCADOWDAY_H at 0x04bb of 1 bytes
+register RTCADOWDAY at 0x04ba of 1 bytes
+register SFRIE1_L at 0x0100 of 2 bytes
+register SFRIE1_H at 0x0101 of 2 bytes
+register SFRIE1 at 0x0100 of 2 bytes
+register SFRIFG1_L at 0x0102 of 2 bytes
+register SFRIFG1_H at 0x0103 of 2 bytes
+register SFRIFG1 at 0x0102 of 2 bytes
+register SFRRPCR_L at 0x0104 of 2 bytes
+register SFRRPCR_H at 0x0105 of 2 bytes
+register SFRRPCR at 0x0104 of 2 bytes
+register SYSCTL_L at 0x0180 of 2 bytes
+register SYSCTL_H at 0x0181 of 2 bytes
+register SYSCTL at 0x0180 of 2 bytes
+register SYSBSLC_L at 0x0182 of 2 bytes
+register SYSBSLC_H at 0x0183 of 2 bytes
+register SYSBSLC at 0x0182 of 2 bytes
+register SYSJMBC_L at 0x0186 of 2 bytes
+register SYSJMBC_H at 0x0187 of 2 bytes
+register SYSJMBC at 0x0186 of 2 bytes
+register SYSJMBI0_L at 0x0188 of 2 bytes
+register SYSJMBI0_H at 0x0189 of 2 bytes
+register SYSJMBI0 at 0x0188 of 2 bytes
+register SYSJMBI1_L at 0x018a of 2 bytes
+register SYSJMBI1_H at 0x018b of 2 bytes
+register SYSJMBI1 at 0x018a of 2 bytes
+register SYSJMBO0_L at 0x018c of 2 bytes
+register SYSJMBO0_H at 0x018d of 2 bytes
+register SYSJMBO0 at 0x018c of 2 bytes
+register SYSJMBO1_L at 0x018e of 2 bytes
+register SYSJMBO1_H at 0x018f of 2 bytes
+register SYSJMBO1 at 0x018e of 2 bytes
+register SYSBERRIV_L at 0x0198 of 2 bytes
+register SYSBERRIV_H at 0x0199 of 2 bytes
+register SYSBERRIV at 0x0198 of 2 bytes
+register SYSUNIV_L at 0x019a of 2 bytes
+register SYSUNIV_H at 0x019b of 2 bytes
+register SYSUNIV at 0x019a of 2 bytes
+register SYSSNIV_L at 0x019c of 2 bytes
+register SYSSNIV_H at 0x019d of 2 bytes
+register SYSSNIV at 0x019c of 2 bytes
+register SYSRSTIV_L at 0x019e of 2 bytes
+register SYSRSTIV_H at 0x019f of 2 bytes
+register SYSRSTIV at 0x019e of 2 bytes
+register TA0CTL at 0x0340 of 1 bytes
+register TA0CCTL0 at 0x0342 of 1 bytes
+register TA0CCTL1 at 0x0344 of 1 bytes
+register TA0CCTL2 at 0x0346 of 1 bytes
+register TA0CCTL3 at 0x0348 of 1 bytes
+register TA0CCTL4 at 0x034a of 1 bytes
+register TA0R at 0x0350 of 1 bytes
+register TA0CCR0 at 0x0352 of 1 bytes
+register TA0CCR1 at 0x0354 of 1 bytes
+register TA0CCR2 at 0x0356 of 1 bytes
+register TA0CCR3 at 0x0358 of 1 bytes
+register TA0CCR4 at 0x035a of 1 bytes
+register TA0IV at 0x036e of 1 bytes
+register TA0EX0 at 0x0360 of 1 bytes
+register TA1CTL at 0x0380 of 1 bytes
+register TA1CCTL0 at 0x0382 of 1 bytes
+register TA1CCTL1 at 0x0384 of 1 bytes
+register TA1CCTL2 at 0x0386 of 1 bytes
+register TA1R at 0x0390 of 1 bytes
+register TA1CCR0 at 0x0392 of 1 bytes
+register TA1CCR1 at 0x0394 of 1 bytes
+register TA1CCR2 at 0x0396 of 1 bytes
+register TA1IV at 0x03ae of 1 bytes
+register TA1EX0 at 0x03a0 of 1 bytes
+register TA2CTL at 0x0400 of 1 bytes
+register TA2CCTL0 at 0x0402 of 1 bytes
+register TA2CCTL1 at 0x0404 of 1 bytes
+register TA2CCTL2 at 0x0406 of 1 bytes
+register TA2R at 0x0410 of 1 bytes
+register TA2CCR0 at 0x0412 of 1 bytes
+register TA2CCR1 at 0x0414 of 1 bytes
+register TA2CCR2 at 0x0416 of 1 bytes
+register TA2IV at 0x042e of 1 bytes
+register TA2EX0 at 0x0420 of 1 bytes
+register TB0CTL at 0x03c0 of 1 bytes
+register TB0CCTL0 at 0x03c2 of 1 bytes
+register TB0CCTL1 at 0x03c4 of 1 bytes
+register TB0CCTL2 at 0x03c6 of 1 bytes
+register TB0CCTL3 at 0x03c8 of 1 bytes
+register TB0CCTL4 at 0x03ca of 1 bytes
+register TB0CCTL5 at 0x03cc of 1 bytes
+register TB0CCTL6 at 0x03ce of 1 bytes
+register TB0R at 0x03d0 of 1 bytes
+register TB0CCR0 at 0x03d2 of 1 bytes
+register TB0CCR1 at 0x03d4 of 1 bytes
+register TB0CCR2 at 0x03d6 of 1 bytes
+register TB0CCR3 at 0x03d8 of 1 bytes
+register TB0CCR4 at 0x03da of 1 bytes
+register TB0CCR5 at 0x03dc of 1 bytes
+register TB0CCR6 at 0x03de of 1 bytes
+register TB0EX0 at 0x03e0 of 1 bytes
+register TB0IV at 0x03ee of 1 bytes
+register UCSCTL0_L at 0x0160 of 2 bytes
+register UCSCTL0_H at 0x0161 of 2 bytes
+register UCSCTL0 at 0x0160 of 2 bytes
+register UCSCTL1_L at 0x0162 of 2 bytes
+register UCSCTL1_H at 0x0163 of 2 bytes
+register UCSCTL1 at 0x0162 of 2 bytes
+register UCSCTL2_L at 0x0164 of 2 bytes
+register UCSCTL2_H at 0x0165 of 2 bytes
+register UCSCTL2 at 0x0164 of 2 bytes
+register UCSCTL3_L at 0x0166 of 2 bytes
+register UCSCTL3_H at 0x0167 of 2 bytes
+register UCSCTL3 at 0x0166 of 2 bytes
+register UCSCTL4_L at 0x0168 of 2 bytes
+register UCSCTL4_H at 0x0169 of 2 bytes
+register UCSCTL4 at 0x0168 of 2 bytes
+register UCSCTL5_L at 0x016a of 2 bytes
+register UCSCTL5_H at 0x016b of 2 bytes
+register UCSCTL5 at 0x016a of 2 bytes
+register UCSCTL6_L at 0x016c of 2 bytes
+register UCSCTL6_H at 0x016d of 2 bytes
+register UCSCTL6 at 0x016c of 2 bytes
+register UCSCTL7_L at 0x016e of 2 bytes
+register UCSCTL7_H at 0x016f of 2 bytes
+register UCSCTL7 at 0x016e of 2 bytes
+register UCSCTL8_L at 0x0170 of 2 bytes
+register UCSCTL8_H at 0x0171 of 2 bytes
+register UCSCTL8 at 0x0170 of 2 bytes
+register UCA0CTLW0_L at 0x05c0 of 1 bytes
+register UCA0CTLW0_H at 0x05c1 of 1 bytes
+register UCA0CTLW0 at 0x05c0 of 1 bytes
+register UCA0BRW_L at 0x05c6 of 1 bytes
+register UCA0BRW_H at 0x05c7 of 1 bytes
+register UCA0BRW at 0x05c6 of 1 bytes
+register UCA0MCTL at 0x05c8 of 1 bytes
+register UCA0STAT at 0x05ca of 1 bytes
+register UCA0RXBUF at 0x05cc of 1 bytes
+register UCA0TXBUF at 0x05ce of 1 bytes
+register UCA0ABCTL at 0x05d0 of 1 bytes
+register UCA0IRCTL_L at 0x05d2 of 1 bytes
+register UCA0IRCTL_H at 0x05d3 of 1 bytes
+register UCA0IRCTL at 0x05d2 of 1 bytes
+register UCA0ICTL_L at 0x05dc of 1 bytes
+register UCA0ICTL_H at 0x05dd of 1 bytes
+register UCA0ICTL at 0x05dc of 1 bytes
+register UCA0IV at 0x05de of 1 bytes
+register UCB0CTLW0_L at 0x05e0 of 1 bytes
+register UCB0CTLW0_H at 0x05e1 of 1 bytes
+register UCB0CTLW0 at 0x05e0 of 1 bytes
+register UCB0BRW_L at 0x05e6 of 1 bytes
+register UCB0BRW_H at 0x05e7 of 1 bytes
+register UCB0BRW at 0x05e6 of 1 bytes
+register UCB0STAT at 0x05ea of 1 bytes
+register UCB0RXBUF at 0x05ec of 1 bytes
+register UCB0TXBUF at 0x05ee of 1 bytes
+register UCB0I2COA_L at 0x05f0 of 1 bytes
+register UCB0I2COA_H at 0x05f1 of 1 bytes
+register UCB0I2COA at 0x05f0 of 1 bytes
+register UCB0I2CSA_L at 0x05f2 of 1 bytes
+register UCB0I2CSA_H at 0x05f3 of 1 bytes
+register UCB0I2CSA at 0x05f2 of 1 bytes
+register UCB0ICTL_L at 0x05fc of 1 bytes
+register UCB0ICTL_H at 0x05fd of 1 bytes
+register UCB0ICTL at 0x05fc of 1 bytes
+register UCB0IV at 0x05fe of 1 bytes
+register UCA1CTLW0_L at 0x0600 of 1 bytes
+register UCA1CTLW0_H at 0x0601 of 1 bytes
+register UCA1CTLW0 at 0x0600 of 1 bytes
+register UCA1BRW_L at 0x0606 of 1 bytes
+register UCA1BRW_H at 0x0607 of 1 bytes
+register UCA1BRW at 0x0606 of 1 bytes
+register UCA1MCTL at 0x0608 of 1 bytes
+register UCA1STAT at 0x060a of 1 bytes
+register UCA1RXBUF at 0x060c of 1 bytes
+register UCA1TXBUF at 0x060e of 1 bytes
+register UCA1ABCTL at 0x0610 of 1 bytes
+register UCA1IRCTL_L at 0x0612 of 1 bytes
+register UCA1IRCTL_H at 0x0613 of 1 bytes
+register UCA1IRCTL at 0x0612 of 1 bytes
+register UCA1ICTL_L at 0x061c of 1 bytes
+register UCA1ICTL_H at 0x061d of 1 bytes
+register UCA1ICTL at 0x061c of 1 bytes
+register UCA1IV at 0x061e of 1 bytes
+register UCB1CTLW0_L at 0x0620 of 1 bytes
+register UCB1CTLW0_H at 0x0621 of 1 bytes
+register UCB1CTLW0 at 0x0620 of 1 bytes
+register UCB1BRW_L at 0x0626 of 1 bytes
+register UCB1BRW_H at 0x0627 of 1 bytes
+register UCB1BRW at 0x0626 of 1 bytes
+register UCB1STAT at 0x062a of 1 bytes
+register UCB1RXBUF at 0x062c of 1 bytes
+register UCB1TXBUF at 0x062e of 1 bytes
+register UCB1I2COA_L at 0x0630 of 1 bytes
+register UCB1I2COA_H at 0x0631 of 1 bytes
+register UCB1I2COA at 0x0630 of 1 bytes
+register UCB1I2CSA_L at 0x0632 of 1 bytes
+register UCB1I2CSA_H at 0x0633 of 1 bytes
+register UCB1I2CSA at 0x0632 of 1 bytes
+register UCB1ICTL_L at 0x063c of 1 bytes
+register UCB1ICTL_H at 0x063d of 1 bytes
+register UCB1ICTL at 0x063c of 1 bytes
+register UCB1IV at 0x063e of 1 bytes
+register WDTCTL_L at 0x015c of 2 bytes
+register WDTCTL_H at 0x015d of 2 bytes
+register WDTCTL at 0x015c of 2 bytes
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+ignoring directive "interrupt"
+make all
+make[1]: Entering directory `/home/drew/embedded/analysis/model/msp430f5310'
+rm -f libregisters.so libinterrupts.so
+g++ -c -fPIC -o registers.o registers.cpp -I../../symbex/klee/include -I../../symbex/llvm-2.9/include -I../../symbex/klee/lib/Core -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS
+g++ -c -fPIC -o interrupts.o interrupts.cpp -I../../symbex/klee/include -I../../symbex/llvm-2.9/include -I../../symbex/klee/lib/Core -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS
+g++ -shared -Wl,-soname,libregisters.so.1 -o libregisters.so.1.0.1 registers.o -lc
+g++ -shared -Wl,-soname,libinterrupts.so.1 -o libinterrupts.so.1.0.1 interrupts.o -lc
+ln -s libregisters.so.1.0.1 libregisters.so
+ln -s libinterrupts.so.1.0.1 libinterrupts.so
+clang -ccc-host-triple msp430-elf -I../common -I../include -D__MSP430__=1 fake_regs.c -emit-llvm -c -o fake_regs.bc
+make[1]: Leaving directory `/home/drew/embedded/analysis/model/msp430f5310'

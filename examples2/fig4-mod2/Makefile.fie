@@ -1,0 +1,6 @@
+CHIP=msp430g2553
+CFLAGS=-Os -Wall -g -mmcu=${CHIP}
+OBJS=main.o
+LIBC_OBJS=/home/ivan/Workspaces/fie/arch/stdlib/abs.bc
+
+include Makefile.testdefs

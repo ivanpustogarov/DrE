@@ -1,0 +1,3 @@
+KLEE: WARNING: undefined reference to function: __bic_SR_register_on_exit
+KLEE: WARNING: undefined reference to function: __bis_SR_register
+KLEE: WARNING: undefined reference to function: assert

@@ -1,0 +1,659 @@
+//===-- Executor.h ----------------------------------------------*- C++ -*-===//
+//
+//                     The KLEE Symbolic Virtual Machine
+//
+// This file is distributed under the University of Illinois Open Source
+// License. See LICENSE.TXT for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// Class to perform actual execution, hides implementation details from external
+// interpreter.
+//
+//===----------------------------------------------------------------------===//
+
+#ifndef KLEE_EXECUTOR_H
+#define KLEE_EXECUTOR_H
+
+#include "klee/ExecutionState.h"
+#include "klee/Solver.h"
+#include "klee/PathManager.h"
+#include "klee/Arch.h"
+#include "klee/Interpreter.h"
+#include "klee/Internal/Module/Cell.h"
+#include "klee/Internal/Module/KInstruction.h"
+#include "klee/Internal/Module/KModule.h"
+
+#include "llvm/ADT/Twine.h"
+#include "llvm/Analysis/CallGraph.h"
+#include "llvm/IR/Instruction.h"
+#include "llvm/IR/Instructions.h"
+#include "llvm/IR/Module.h"
+
+#include <vector>
+#include <string>
+#include <map>
+#include <set>
+
+#define TARGET_FUNC_NAME "assert"
+#define ENTRY_FUNC_NAME "main"
+
+struct KTest;
+
+namespace llvm {
+  class BasicBlock;
+  class BranchInst;
+  class CallInst;
+  class Constant;
+  class ConstantExpr;
+  class Function;
+  class GlobalValue;
+  class Instruction;
+#if LLVM_VERSION_CODE <= LLVM_VERSION(3, 1)
+  class TargetData;
+#else
+  class DataLayout;
+#endif
+  class Twine;
+  class Value;
+}
+
+namespace klee {  
+  class Array;
+  struct Cell;
+  class ExecutionState;
+  class ExternalDispatcher;
+  class Expr;
+  class InstructionInfoTable;
+  struct KFunction;
+  struct KInstruction;
+  class KInstIterator;
+  class KModule;
+  class MemoryManager;
+  class MemoryObject;
+  class ObjectState;
+  class PTree;
+  class Searcher;
+  class SeedInfo;
+  class SpecialFunctionHandler;
+  struct StackFrame;
+  class StatsTracker;
+  class TimingSolver;
+  class TreeStreamWriter;
+  template<class T> class ref;
+  class PathManager;
+
+
+
+  /// \todo Add a context object to keep track of data only live
+  /// during an instruction step. Should contain addedStates,
+  /// removedStates, and haltExecution, among others.
+
+class Executor : public Interpreter {
+  friend class BumpMergingSearcher;
+  friend class MergingSearcher;
+  friend class RandomPathSearcher;
+  friend class OwningSearcher;
+  friend class WeightedRandomSearcher;
+  friend class SpecialFunctionHandler;
+  friend class StatsTracker;
+
+public:
+  class Timer {
+  public:
+    Timer();
+    virtual ~Timer();
+
+    /// The event callback.
+    virtual void run() = 0;
+  };
+
+  typedef std::pair<ExecutionState*,ExecutionState*> StatePair;
+
+  /// IVAN ADDIDIONS START
+  Architecture * arch;
+  std::set<llvm::Function *> mergeBlacklist;
+  typedef std::vector<const llvm::Function *>   FVector;
+  typedef std::vector<const llvm::BasicBlock *> BBVector;
+
+  virtual int path_main_routine(std::string start_function_name, std::string target_function_name); // The main function to build path
+  virtual void startCompositSymbEx(llvm::Function *f, int argc, char **argv, char **envp);
+
+  /// IVAN ADDIDIONS END
+
+private:
+  class TimerInfo;
+
+  KModule *kmodule;
+  InterpreterHandler *interpreterHandler;
+  Searcher *searcher;
+
+  ExternalDispatcher *externalDispatcher;
+  TimingSolver *solver;
+  MemoryManager *memory;
+  std::set<ExecutionState*> states;
+  StatsTracker *statsTracker;
+  TreeStreamWriter *pathWriter, *symPathWriter;
+  SpecialFunctionHandler *specialFunctionHandler;
+  std::vector<TimerInfo*> timers;
+  PTree *processTree;
+
+
+  /// IVAN ADDIDIONS START
+  
+  // Functions
+
+
+  /* *** Functions to support state pruning begin *** */
+  MemConfMap allSavedConfigs;
+  bool isStateMergeTime(KInstruction * ki);
+  bool isDuplicateState(ExecutionState &state, KInstruction * ki);
+  void initializeMergeBlackList();
+  /* *** */
+
+  /* *** Functions to support interrupts *** */
+  ExecutionState* interruptFork(ExecutionState *state, const llvm::Function *iFun, KInstruction *ki);
+  void executeInterrupts(ExecutionState * state, KInstruction * inst);
+  /* *** */
+
+  
+  uint64_t get_free_memchunk_at_guest(unsigned size, ExecutionState *state);
+  std::string fvector_to_string(FVector fvector);
+  FVector Dijkstra_call_graph(llvm::CallGraph &call_graph, llvm::CallGraphNode *st, llvm::CallGraphNode *target_node);
+  BBVector Dijkstra_cfg(llvm::Function *parent_f, 
+  llvm::BasicBlock *entry_bb,
+  llvm::BasicBlock *target_bb,
+  std::vector<std::pair<llvm::BasicBlock*,llvm::BasicBlock*> > *);
+
+  //FVector get_call_graph_path(llvm::Module *Mod, std::string entry_func_name, std::string target_func_name);
+  //FVector get_call_graph_path(llvm::Module *Mod, llvm::Function *entry_func, llvm::Function *target_func);
+  FVector get_call_graph_path(llvm::Function *entry_func, llvm::Function *target_func);
+  // Get the first call to function f2 from inside function f1
+  llvm::Instruction *get_call_inst(llvm::Function *f1, llvm::Function *f2);
+  // Get the shortest path from f1's entry to the first call to f2. If f2 is null then, the the first return instruction.
+  BBVector get_cfg_path(llvm::Function *f1, llvm::Function *f2);
+  int combine_instructions();
+  //int search_for_call_instructions(std::set<llvm::Instruction *> inst_set, FVector already_analyzed);
+  // In each block in each cfg path, find call instruction. Create cfg paths for these functions
+  // Upon return <path_functions>  contains functions for which we built a cfg path
+  int expand_call_instructions(std::map<llvm::Function *, BBVector> &cfg_paths, FVector &path_functions);
+  // Find the function to which <src> belongs, extract the first and the last blocks for the
+  // cfg path for this function, and rebuild this path assuming that there is no arc between src and dst
+  int rebuildInfeasableCFGPath(llvm::BasicBlock *src, llvm::BasicBlock *dst);
+  //int print_path1(const llvm::Function *f, int level);
+  int build_path(const llvm::Function *f); // Create a sequence of blocks representing a path to the target block.
+                                           // It goes inside each call instruction
+  int print_path2();
+  std::vector<llvm::CallInst *> extract_call_insts_from_path();
+  void make_interrupt_values_symbolic(ExecutionState *s);
+  void make_globals_symbolic(ExecutionState *s, std::vector<llvm::Value *> globals);
+
+  //void scan2(const ref<Expr> &e, llvm::Function *);
+  //static std::vector<ref<Expr> > extract_concat_subexpressions(ref<Expr> e);
+  //std::vector<llvm::CallInst *> resolve_call_symbolic(path_summary_ty ps);
+  //std::vector<llvm::CallInst *> resolve_call_symbolics(llvm::Function *f, int ps_index);
+  //std::map<llvm::CallInst *, std::vector< ref<Expr> > > resolve_call_symbolics(llvm::Function *f);
+  //std::map<llvm::CallInst *, std::vector< ref<Expr> > > resolve_call_symbolics(llvm::Function *f, constraints_ty conds);
+  //std::map<llvm::CallInst *, std::vector< ref<Expr> > >  resolve_call_symbolics1(path_summary_ty &f1_smmry, path_summary_ty &f2_smmry);
+
+  //void run_supplementary_functions(std::map<llvm::CallInst *, std::vector< ref<Expr> > > calls);
+  int run_supplementary_functions(path_summary_ty &path_smmry);
+  bool conds_are_solvable(ref<Expr> x, std::vector< ref<Expr> > *conditions);
+  bool check_formal_args_against_fsummary(path_summary_ty &smmry, std::vector<std::vector< ref<Expr> > > &formal_args_conditions);
+  int explore_inner_call(InnerCall *inner_call);
+  void merge_dublicated_good_summaries(llvm::Function *f);
+  void branch_connected_summaries(ExecutionState &state, unsigned N, std::vector<ExecutionState*> &result);
+  void adapt_psummary_to_inner_call(InnerCall *inner_call, path_summary_ty *smmry);
+
+  // Fields
+  unsigned min_num_of_summaries_to_collect; // we initialize this filed in function <get_call_graph_path>
+  std::map<llvm::Function *, bool> should_collect_more_summaries;
+  FVector call_path; // Path from main to assert in the call graph
+  FVector path_functions; // This includes call_path + functions from call instructions along the path 
+  std::map<llvm::Function *, BBVector> cfg_paths; // For each function in path_functions, keep its cfg_path
+  // Path is a sequence of basic blocks and call and ret instructions
+  // Is is represented a vector of pairs. In each pair, only one element can be non-NULL
+  // This is a hack to model a vector which accepts several elements' data types.
+  std::vector<std::pair<llvm::BasicBlock *, llvm::Instruction *> > path;
+
+  // This map contains correspondence between functions' return values and constraints on
+  // the functions' parameters
+  //typedef std::vector< ref<Expr> > constraints_ty;
+  std::map<llvm::Function *, std::vector<path_summary_ty *> > path_summaries;
+  std::map<llvm::Function *, std::vector<path_summary_ty *> > good_path_summaries;
+  std::map<llvm::Function *, std::vector<ref<Expr> > > fargs;
+
+  // the function from which we start compositional sybmolic execution
+  std::string start_function_name;
+  llvm::Function *start_function;
+  // This proceed with symbolic execution until we reach this function
+  std::string target_function_name;
+  llvm::Function *target_function;
+
+  // This is to avoid multiple call to bindModuleConstants() at the beginning of run()
+  bool module_constansts_bound;
+
+  void print_function_summaries(std::map<llvm::Function *, std::vector<path_summary_ty *> > ps);
+  void print_function_summary(path_summary_ty *smmry);
+  void print_state_constraints(ExecutionState *state);
+  int print_summary_chains(path_summary_ty *f1_smmry);
+  //int paint_summary_chains(path_summary_ty *f1_smmry);
+  std::vector<llvm::Value *> get_global_calling_context(llvm::Function *f);
+  //void comp_symbex_replace_for_retvalue(ref<Expr> &condition, ref<Expr> &retvalue);
+  ref<Expr> comp_symbex_replace_for_retvalue(ref<Expr> condition, ref<Expr> &retvalue);
+  path_summary_ty *find_next_callgraph_psummary(path_summary_ty *cur_psmmary, llvm::Function *cur_func);
+  InnerCall* get_InnerCall_by_seqnum(path_summary_ty *smmry, unsigned seqnum);
+  std::vector<ref<Expr> > extract_constraints_for_symbolics(ConstraintManager &path_constraints, ref<Expr> &e);
+
+
+  /* This function is used to keep the right number of indeices for getElementPtr
+   * instruction. It should be invoked before each computeOffsets() function.
+   * We need this function becuase we run Executor::run() (and hence computeOffsets()
+   * many times */
+  template <typename TypeIt>
+  void clearOffsets(KGEPInstruction *kgepi, TypeIt ib, TypeIt ie);
+
+  bool is_part_of_callpath(llvm::Function *f);
+  bool state_complies_with_fsummary(ExecutionState *state);
+  bool state_complies_with_fsummary1(ExecutionState *state);
+
+ 
+  // TODO: remove the following two function, they are obsolete,
+  //       we replaced them with Drew's functions
+  bool state_can_be_merged(ExecutionState *es);
+  bool states_are_equivalent(ExecutionState *s1, ExecutionState *s2);
+
+
+  // This vector contains symbolic expressions which we used to replace functions calls.
+  //std::map<ref<Expr>, llvm::CallInst *, classcomp> call_symbolic_replacements;
+  //std::map<llvm::Function *, call_symbolic_replacements_ty> call_symbolic_replacements;
+
+  int comp_symbex_target_reached; // We use this field for compostional symblolic execution;
+                      // 1) If we go along the call path, then we set it to 1
+                      //    when we reach the call to the next function in the path;
+                      // 2) If we execute a function which we replaced with a symbolics,
+                      //    then we set this field to 1, when we reach a return instruction
+                      //    and the constraints on the return value are satisfied.
+  bool comp_symbex_can_glue(llvm::Function *f1, ExecutionState &state_f1, std::vector< ref<Expr> > f2_actual_args);
+  bool comp_symbex_can_glue1(path_summary_ty &f1_smmry, path_summary_ty &f2_smmry);
+  int forward_symbex;
+  int rand_search_freq; // this is  3 means every 3rd iteration
+  bool prefer_short_summaries; // when doing reandom search, prefer states with less instructions in the current path summary (if any)
+  path_summary_ty *start_summary; // summary from which to start forward symbex
+
+  time_t build_fsummary_start_timer;
+
+  // This field is obsolete, TODO: remove
+  std::set<llvm::Instruction *> path_instructions; // Set of instructions that belong to the path between main() and assert()
+
+  /// IVAN ADDIDIONS END
+
+  /// Used to track states that have been added during the current
+  /// instructions step. 
+  /// \invariant \ref addedStates is a subset of \ref states. 
+  /// \invariant \ref addedStates and \ref removedStates are disjoint.
+  std::set<ExecutionState*> addedStates;
+  /// Used to track states that have been removed during the current
+  /// instructions step. 
+  /// \invariant \ref removedStates is a subset of \ref states. 
+  /// \invariant \ref addedStates and \ref removedStates are disjoint.
+  std::set<ExecutionState*> removedStates;
+
+  /// When non-empty the Executor is running in "seed" mode. The
+  /// states in this map will be executed in an arbitrary order
+  /// (outside the normal search interface) until they terminate. When
+  /// the states reach a symbolic branch then either direction that
+  /// satisfies one or more seeds will be added to this map. What
+  /// happens with other states (that don't satisfy the seeds) depends
+  /// on as-yet-to-be-determined flags.
+  std::map<ExecutionState*, std::vector<SeedInfo> > seedMap;
+  
+  /// Map of globals to their representative memory object.
+  std::map<const llvm::GlobalValue*, MemoryObject*> globalObjects;
+
+  /// Map of globals to their bound address. This also includes
+  /// globals that have no representative object (i.e. functions).
+  std::map<const llvm::GlobalValue*, ref<ConstantExpr> > globalAddresses;
+
+  /// The set of legal function addresses, used to validate function
+  /// pointers. We use the actual Function* address as the function address.
+  std::set<uint64_t> legalFunctions;
+
+  /// When non-null the bindings that will be used for calls to
+  /// klee_make_symbolic in order replay.
+  const struct KTest *replayOut;
+  /// When non-null a list of branch decisions to be used for replay.
+  const std::vector<bool> *replayPath;
+  /// The index into the current \ref replayOut or \ref replayPath
+  /// object.
+  unsigned replayPosition;
+
+  /// When non-null a list of "seed" inputs which will be used to
+  /// drive execution.
+  const std::vector<struct KTest *> *usingSeeds;  
+
+  /// Disables forking, instead a random path is chosen. Enabled as
+  /// needed to control memory usage. \see fork()
+  bool atMemoryLimit;
+
+  /// Disables forking, set by client. \see setInhibitForking()
+  bool inhibitForking;
+
+  /// Signals the executor to halt execution at the next instruction
+  /// step.
+  bool haltExecution;  
+
+  /// Whether implied-value concretization is enabled. Currently
+  /// false, it is buggy (it needs to validate its writes).
+  bool ivcEnabled;
+
+  /// The maximum time to allow for a single core solver query.
+  /// (e.g. for a single STP query)
+  double coreSolverTimeout; 
+
+  llvm::Function* getTargetFunction(llvm::Value *calledVal,
+                                    ExecutionState &state);
+  
+  void executeInstruction(ExecutionState &state, KInstruction *ki);
+
+  void printFileLine(ExecutionState &state, KInstruction *ki);
+
+  void run(ExecutionState &initialState);
+
+  // Given a concrete object in our [klee's] address space, add it to 
+  // objects checked code can reference.
+  MemoryObject *addExternalObject(ExecutionState &state, void *addr, 
+                                  unsigned size, bool isReadOnly);
+
+  void initializeGlobalObject(ExecutionState &state, ObjectState *os, 
+			      const llvm::Constant *c,
+			      unsigned offset);
+  void initializeGlobals(ExecutionState &state);
+  /// IVAN ADDITIONS BEGIN
+  void initializeSpecialGlobals(ExecutionState &state);
+  /// IVAN ADDITIONS END
+
+  void stepInstruction(ExecutionState &state);
+  void updateStates(ExecutionState *current);
+  void transferToBasicBlock(llvm::BasicBlock *dst, 
+			    llvm::BasicBlock *src,
+			    ExecutionState &state);
+
+  void callExternalFunction(ExecutionState &state,
+                            KInstruction *target,
+                            llvm::Function *function,
+                            std::vector< ref<Expr> > &arguments);
+
+  ObjectState *bindObjectInState(ExecutionState &state, const MemoryObject *mo,
+                                 bool isLocal, const Array *array = 0);
+
+  /// Resolve a pointer to the memory objects it could point to the
+  /// start of, forking execution when necessary and generating errors
+  /// for pointers to invalid locations (either out of bounds or
+  /// address inside the middle of objects).
+  ///
+  /// \param results[out] A list of ((MemoryObject,ObjectState),
+  /// state) pairs for each object the given address can point to the
+  /// beginning of.
+  typedef std::vector< std::pair<std::pair<const MemoryObject*, const ObjectState*>, 
+                                 ExecutionState*> > ExactResolutionList;
+  void resolveExact(ExecutionState &state,
+                    ref<Expr> p,
+                    ExactResolutionList &results,
+                    const std::string &name);
+
+  /// Allocate and bind a new object in a particular state. NOTE: This
+  /// function may fork.
+  ///
+  /// \param isLocal Flag to indicate if the object should be
+  /// automatically deallocated on function return (this also makes it
+  /// illegal to free directly).
+  ///
+  /// \param target Value at which to bind the base address of the new
+  /// object.
+  ///
+  /// \param reallocFrom If non-zero and the allocation succeeds,
+  /// initialize the new object from the given one and unbind it when
+  /// done (realloc semantics). The initialized bytes will be the
+  /// minimum of the size of the old and new objects, with remaining
+  /// bytes initialized as specified by zeroMemory.
+  void executeAlloc(ExecutionState &state,
+                    ref<Expr> size,
+                    bool isLocal,
+                    KInstruction *target,
+                    bool zeroMemory=false,
+                    const ObjectState *reallocFrom=0);
+
+  /// Free the given address with checking for errors. If target is
+  /// given it will be bound to 0 in the resulting states (this is a
+  /// convenience for realloc). Note that this function can cause the
+  /// state to fork and that \ref state cannot be safely accessed
+  /// afterwards.
+  void executeFree(ExecutionState &state,
+                   ref<Expr> address,
+                   KInstruction *target = 0);
+  
+  void executeCall(ExecutionState &state, 
+                   KInstruction *ki,
+                   llvm::Function *f,
+                   std::vector< ref<Expr> > &arguments);
+                   
+  // do address resolution / object binding / out of bounds checking
+  // and perform the operation
+  void executeMemoryOperation(ExecutionState &state,
+                              bool isWrite,
+                              ref<Expr> address,
+                              ref<Expr> value /* undef if read */,
+                              KInstruction *target /* undef if write */);
+
+  void executeMakeSymbolic(ExecutionState &state, const MemoryObject *mo,
+                           const std::string &name);
+
+  /// Create a new state where each input condition has been added as
+  /// a constraint and return the results. The input state is included
+  /// as one of the results. Note that the output vector may included
+  /// NULL pointers for states which were unable to be created.
+  void branch(ExecutionState &state, 
+              const std::vector< ref<Expr> > &conditions,
+              std::vector<ExecutionState*> &result);
+
+  // Fork current and return states in which condition holds / does
+  // not hold, respectively. One of the states is necessarily the
+  // current state, and one of the states may be null.
+  StatePair fork(ExecutionState &current, ref<Expr> condition, bool isInternal);
+
+  /// Add the given (boolean) condition as a constraint on state. This
+  /// function is a wrapper around the state's addConstraint function
+  /// which also manages propagation of implied values,
+  /// validity checks, and seed patching.
+  void addConstraint(ExecutionState &state, ref<Expr> condition);
+
+  // Called on [for now] concrete reads, replaces constant with a symbolic
+  // Used for testing.
+  ref<Expr> replaceReadWithSymbolic(ExecutionState &state, ref<Expr> e);
+
+  const Cell& eval(KInstruction *ki, unsigned index, 
+                   ExecutionState &state) const;
+
+  Cell& getArgumentCell(ExecutionState &state,
+                        KFunction *kf,
+                        unsigned index) {
+    return state.stack.back().locals[kf->getArgRegister(index)];
+  }
+
+  Cell& getDestCell(ExecutionState &state,
+                    KInstruction *target) {
+    return state.stack.back().locals[target->dest];
+  }
+
+  void bindLocal(KInstruction *target, 
+                 ExecutionState &state, 
+                 ref<Expr> value);
+  void bindArgument(KFunction *kf, 
+                    unsigned index,
+                    ExecutionState &state,
+                    ref<Expr> value);
+
+  ref<klee::ConstantExpr> evalConstantExpr(const llvm::ConstantExpr *ce);
+
+  /// Return a unique constant value for the given expression in the
+  /// given state, if it has one (i.e. it provably only has a single
+  /// value). Otherwise return the original expression.
+  ref<Expr> toUnique(const ExecutionState &state, ref<Expr> &e);
+
+  /// Return a constant value for the given expression, forcing it to
+  /// be constant in the given state by adding a constraint if
+  /// necessary. Note that this function breaks completeness and
+  /// should generally be avoided.
+  ///
+  /// \param purpose An identify string to printed in case of concretization.
+  ref<klee::ConstantExpr> toConstant(ExecutionState &state, ref<Expr> e, 
+                                     const char *purpose);
+
+  /// Bind a constant value for e to the given target. NOTE: This
+  /// function may fork state if the state has multiple seeds.
+  void executeGetValue(ExecutionState &state, ref<Expr> e, KInstruction *target);
+
+  /// Get textual information regarding a memory address.
+  std::string getAddressInfo(ExecutionState &state, ref<Expr> address) const;
+
+  // Determines the \param lastInstruction of the \param state which is not KLEE
+  // internal and returns its InstructionInfo
+  const InstructionInfo & getLastNonKleeInternalInstruction(const ExecutionState &state,
+      llvm::Instruction** lastInstruction);
+
+  // remove state from queue and delete
+  void terminateState(ExecutionState &state);
+  // call exit handler and terminate state
+  void terminateStateEarly(ExecutionState &state, const llvm::Twine &message);
+  // call exit handler and terminate state
+  void terminateStateOnExit(ExecutionState &state);
+  // call error handler and terminate state
+  void terminateStateOnError(ExecutionState &state, 
+                             const llvm::Twine &message,
+                             const char *suffix,
+                             const llvm::Twine &longMessage="");
+
+  // call error handler and terminate state, for execution errors
+  // (things that should not be possible, like illegal instruction or
+  // unlowered instrinsic, or are unsupported, like inline assembly)
+  void terminateStateOnExecError(ExecutionState &state, 
+                                 const llvm::Twine &message,
+                                 const llvm::Twine &info="") {
+    terminateStateOnError(state, message, "exec.err", info);
+  }
+
+  /// bindModuleConstants - Initialize the module constant table.
+  void bindModuleConstants();
+
+  template <typename TypeIt>
+  void computeOffsets(KGEPInstruction *kgepi, TypeIt ib, TypeIt ie);
+
+  /// bindInstructionConstants - Initialize any necessary per instruction
+  /// constant values.
+  void bindInstructionConstants(KInstruction *KI);
+
+  void handlePointsToObj(ExecutionState &state, 
+                         KInstruction *target, 
+                         const std::vector<ref<Expr> > &arguments);
+
+  void doImpliedValueConcretization(ExecutionState &state,
+                                    ref<Expr> e,
+                                    ref<ConstantExpr> value);
+
+  /// Add a timer to be executed periodically.
+  ///
+  /// \param timer The timer object to run on firings.
+  /// \param rate The approximate delay (in seconds) between firings.
+  void addTimer(Timer *timer, double rate);
+
+  void initTimers();
+  void processTimers(ExecutionState *current,
+                     double maxInstTime);
+                
+public:
+  Executor(const InterpreterOptions &opts, InterpreterHandler *ie);
+  Executor(const InterpreterOptions &opts, InterpreterHandler *ih, Solver *coreSolver);
+  virtual ~Executor();
+
+  const InterpreterHandler& getHandler() {
+    return *interpreterHandler;
+  }
+
+  // XXX should just be moved out to utility module
+  ref<klee::ConstantExpr> evalConstant(const llvm::Constant *c);
+
+  virtual void setPathWriter(TreeStreamWriter *tsw) {
+    pathWriter = tsw;
+  }
+  virtual void setSymbolicPathWriter(TreeStreamWriter *tsw) {
+    symPathWriter = tsw;
+  }      
+
+  virtual void setReplayOut(const struct KTest *out) {
+    assert(!replayPath && "cannot replay both buffer and path");
+    replayOut = out;
+    replayPosition = 0;
+  }
+
+  virtual void setReplayPath(const std::vector<bool> *path) {
+    assert(!replayOut && "cannot replay both buffer and path");
+    replayPath = path;
+    replayPosition = 0;
+  }
+
+  virtual const llvm::Module *
+    setModule(llvm::Module *module, const ModuleOptions &opts);
+  void setModule(KModule *_kmodule);
+  virtual void setArch(Architecture * arch);
+
+  virtual void useSeeds(const std::vector<struct KTest *> *seeds) { 
+    usingSeeds = seeds;
+  }
+
+  virtual void runFunctionAsMain(llvm::Function *f,
+                                 int argc,
+                                 char **argv,
+                                 char **envp);
+
+  virtual void runFunctionAsNonMain(llvm::Function *f1, llvm::Function *f2,
+                                    std::vector<ref<Expr> >  *ret_conds);
+
+
+  virtual void runInnerCall(InnerCall &inner_call);
+
+  /*** Runtime options ***/
+  
+  virtual void setHaltExecution(bool value) {
+    haltExecution = value;
+  }
+
+  virtual void setInhibitForking(bool value) {
+    inhibitForking = value;
+  }
+
+  /*** State accessor methods ***/
+
+  virtual unsigned getPathStreamID(const ExecutionState &state);
+
+  virtual unsigned getSymbolicPathStreamID(const ExecutionState &state);
+
+  virtual void getConstraintLog(const ExecutionState &state,
+                                std::string &res,
+                                Interpreter::LogType logFormat = Interpreter::STP);
+
+  virtual bool getSymbolicSolution(const ExecutionState &state, 
+                                   std::vector< 
+                                   std::pair<std::string,
+                                   std::vector<unsigned char> > >
+                                   &res);
+
+  virtual void getCoveredLines(const ExecutionState &state,
+                               std::map<const std::string*, std::set<unsigned> > &res);
+
+  Expr::Width getWidthForLLVMType(LLVM_TYPE_Q llvm::Type *type) const;
+};
+  
+} // End klee namespace
+
+#endif

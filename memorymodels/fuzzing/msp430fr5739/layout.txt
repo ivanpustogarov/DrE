@@ -1,0 +1,749 @@
+layout 0x10000
+range 0x1800 0x18ff persistent information_memory
+range 0x1800 0x187f flash
+range 0x1880 0x18ff flash
+addr ADC10CTL0_L 0x0700 1
+addr ADC10CTL0_H 0x0701 1
+addr ADC10CTL0 0x0700 1
+addr ADC10CTL1_L 0x0702 1
+addr ADC10CTL1_H 0x0703 1
+addr ADC10CTL1 0x0702 1
+addr ADC10CTL2_L 0x0704 1
+addr ADC10CTL2_H 0x0705 1
+addr ADC10CTL2 0x0704 1
+addr ADC10LO_L 0x0706 1
+addr ADC10LO_H 0x0707 1
+addr ADC10LO 0x0706 1
+addr ADC10HI_L 0x0708 1
+addr ADC10HI_H 0x0709 1
+addr ADC10HI 0x0708 1
+addr ADC10MCTL0_L 0x070a 1
+addr ADC10MCTL0_H 0x070b 1
+addr ADC10MCTL0 0x070a 1
+addr ADC10MEM0_L 0x0712 1
+addr ADC10MEM0_H 0x0713 1
+addr ADC10MEM0 0x0712 1
+addr ADC10IE_L 0x071a 1
+addr ADC10IE_H 0x071b 1
+addr ADC10IE 0x071a 1
+addr ADC10IFG_L 0x071c 1
+addr ADC10IFG_H 0x071d 1
+addr ADC10IFG 0x071c 1
+addr ADC10IV_L 0x071e 1
+addr ADC10IV_H 0x071f 1
+addr ADC10IV 0x071e 1
+addr CSCTL0_L 0x0160 2
+addr CSCTL0_H 0x0161 2
+addr CSCTL0 0x0160 2
+addr CSCTL1_L 0x0162 2
+addr CSCTL1_H 0x0163 2
+addr CSCTL1 0x0162 2
+addr CSCTL2_L 0x0164 2
+addr CSCTL2_H 0x0165 2
+addr CSCTL2 0x0164 2
+addr CSCTL3_L 0x0166 2
+addr CSCTL3_H 0x0167 2
+addr CSCTL3 0x0166 2
+addr CSCTL4_L 0x0168 2
+addr CSCTL4_H 0x0169 2
+addr CSCTL4 0x0168 2
+addr CSCTL5_L 0x016a 2
+addr CSCTL5_H 0x016b 2
+addr CSCTL5 0x016a 2
+addr CSCTL6_L 0x016c 2
+addr CSCTL6_H 0x016d 2
+addr CSCTL6 0x016c 2
+addr CDCTL0_L 0x08c0 1
+addr CDCTL0_H 0x08c1 1
+addr CDCTL0 0x08c0 1
+addr CDCTL1_L 0x08c2 1
+addr CDCTL1_H 0x08c3 1
+addr CDCTL1 0x08c2 1
+addr CDCTL2_L 0x08c4 1
+addr CDCTL2_H 0x08c5 1
+addr CDCTL2 0x08c4 1
+addr CDCTL3_L 0x08c6 1
+addr CDCTL3_H 0x08c7 1
+addr CDCTL3 0x08c6 1
+addr CDINT_L 0x08cc 1
+addr CDINT_H 0x08cd 1
+addr CDINT 0x08cc 1
+addr CDIV_L 0x08ce 1
+addr CDIV_H 0x08cf 1
+addr CDIV 0x08ce 1
+addr CRCDI_L 0x0150 2
+addr CRCDI_H 0x0151 2
+addr CRCDI 0x0150 2
+addr CRCDIRB_L 0x0152 2
+addr CRCDIRB_H 0x0153 2
+addr CRCDIRB 0x0152 2
+addr CRCINIRES_L 0x0154 2
+addr CRCINIRES_H 0x0155 2
+addr CRCINIRES 0x0154 2
+addr CRCRESR_L 0x0156 2
+addr CRCRESR_H 0x0157 2
+addr CRCRESR 0x0156 2
+addr DMACTL0_L 0x0500 1
+addr DMACTL0_H 0x0501 1
+addr DMACTL0 0x0500 1
+addr DMACTL1_L 0x0502 1
+addr DMACTL1_H 0x0503 1
+addr DMACTL1 0x0502 1
+addr DMACTL2_L 0x0504 1
+addr DMACTL2_H 0x0505 1
+addr DMACTL2 0x0504 1
+addr DMACTL3_L 0x0506 1
+addr DMACTL3_H 0x0507 1
+addr DMACTL3 0x0506 1
+addr DMACTL4_L 0x0508 1
+addr DMACTL4_H 0x0509 1
+addr DMACTL4 0x0508 1
+addr DMAIV_L 0x050e 1
+addr DMAIV_H 0x050f 1
+addr DMAIV 0x050e 1
+addr DMA0CTL_L 0x0510 1
+addr DMA0CTL_H 0x0511 1
+addr DMA0CTL 0x0510 1
+addr DMA0SA 0x0512 1
+addr DMA0DA 0x0516 1
+addr DMA0SZ 0x051a 1
+addr DMA1CTL_L 0x0520 1
+addr DMA1CTL_H 0x0521 1
+addr DMA1CTL 0x0520 1
+addr DMA1SA 0x0522 1
+addr DMA1DA 0x0526 1
+addr DMA1SZ 0x052a 1
+addr DMA2CTL_L 0x0530 1
+addr DMA2CTL_H 0x0531 1
+addr DMA2CTL 0x0530 1
+addr DMA2SA 0x0532 1
+addr DMA2DA 0x0536 1
+addr DMA2SZ 0x053a 1
+addr FRCTL0_L 0x0140 2
+addr FRCTL0_H 0x0141 2
+addr FRCTL0 0x0140 2
+addr GCCTL0_L 0x0144 2
+addr GCCTL0_H 0x0145 2
+addr GCCTL0 0x0144 2
+addr GCCTL1_L 0x0146 2
+addr GCCTL1_H 0x0147 2
+addr GCCTL1 0x0146 2
+addr MPUCTL0_L 0x05a0 1
+addr MPUCTL0_H 0x05a1 1
+addr MPUCTL0 0x05a0 1
+addr MPUCTL1_L 0x05a2 1
+addr MPUCTL1_H 0x05a3 1
+addr MPUCTL1 0x05a2 1
+addr MPUSEG_L 0x05a4 1
+addr MPUSEG_H 0x05a5 1
+addr MPUSEG 0x05a4 1
+addr MPUSAM_L 0x05a6 1
+addr MPUSAM_H 0x05a7 1
+addr MPUSAM 0x05a6 1
+addr MPY_L 0x04c0 1
+addr MPY_H 0x04c1 1
+addr MPY 0x04c0 1
+addr MPYS_L 0x04c2 1
+addr MPYS_H 0x04c3 1
+addr MPYS 0x04c2 1
+addr MAC_L 0x04c4 1
+addr MAC_H 0x04c5 1
+addr MAC 0x04c4 1
+addr MACS_L 0x04c6 1
+addr MACS_H 0x04c7 1
+addr MACS 0x04c6 1
+addr OP2_L 0x04c8 1
+addr OP2_H 0x04c9 1
+addr OP2 0x04c8 1
+addr RESLO_L 0x04ca 1
+addr RESLO_H 0x04cb 1
+addr RESLO 0x04ca 1
+addr RESHI_L 0x04cc 1
+addr RESHI_H 0x04cd 1
+addr RESHI 0x04cc 1
+addr SUMEXT_L 0x04ce 1
+addr SUMEXT_H 0x04cf 1
+addr SUMEXT 0x04ce 1
+addr MPY32L_L 0x04d0 1
+addr MPY32L_H 0x04d1 1
+addr MPY32L 0x04d0 1
+addr MPY32H_L 0x04d2 1
+addr MPY32H_H 0x04d3 1
+addr MPY32H 0x04d2 1
+addr MPYS32L_L 0x04d4 1
+addr MPYS32L_H 0x04d5 1
+addr MPYS32L 0x04d4 1
+addr MPYS32H_L 0x04d6 1
+addr MPYS32H_H 0x04d7 1
+addr MPYS32H 0x04d6 1
+addr MAC32L_L 0x04d8 1
+addr MAC32L_H 0x04d9 1
+addr MAC32L 0x04d8 1
+addr MAC32H_L 0x04da 1
+addr MAC32H_H 0x04db 1
+addr MAC32H 0x04da 1
+addr MACS32L_L 0x04dc 1
+addr MACS32L_H 0x04dd 1
+addr MACS32L 0x04dc 1
+addr MACS32H_L 0x04de 1
+addr MACS32H_H 0x04df 1
+addr MACS32H 0x04de 1
+addr OP2L_L 0x04e0 1
+addr OP2L_H 0x04e1 1
+addr OP2L 0x04e0 1
+addr OP2H_L 0x04e2 1
+addr OP2H_H 0x04e3 1
+addr OP2H 0x04e2 1
+addr RES0_L 0x04e4 1
+addr RES0_H 0x04e5 1
+addr RES0 0x04e4 1
+addr RES1_L 0x04e6 1
+addr RES1_H 0x04e7 1
+addr RES1 0x04e6 1
+addr RES2_L 0x04e8 1
+addr RES2_H 0x04e9 1
+addr RES2 0x04e8 1
+addr RES3_L 0x04ea 1
+addr RES3_H 0x04eb 1
+addr RES3 0x04ea 1
+addr MPY32CTL0_L 0x04ec 1
+addr MPY32CTL0_H 0x04ed 1
+addr MPY32CTL0 0x04ec 1
+addr PMMCTL0_L 0x0120 2
+addr PMMCTL0_H 0x0121 2
+addr PMMCTL0 0x0120 2
+addr PMMIFG_L 0x012a 2
+addr PMMIFG_H 0x012b 2
+addr PMMIFG 0x012a 2
+addr PM5CTL0_L 0x0130 2
+addr PM5CTL0_H 0x0131 2
+addr PM5CTL0 0x0130 2
+addr PAIN_L 0x0200 1
+addr PAIN_H 0x0201 1
+addr PAIN 0x0200 1
+addr PAOUT_L 0x0202 1
+addr PAOUT_H 0x0203 1
+addr PAOUT 0x0202 1
+addr PADIR_L 0x0204 1
+addr PADIR_H 0x0205 1
+addr PADIR 0x0204 1
+addr PAREN_L 0x0206 1
+addr PAREN_H 0x0207 1
+addr PAREN 0x0206 1
+addr PASEL0_L 0x020a 1
+addr PASEL0_H 0x020b 1
+addr PASEL0 0x020a 1
+addr PASEL1_L 0x020c 1
+addr PASEL1_H 0x020d 1
+addr PASEL1 0x020c 1
+addr PASELC_L 0x0216 1
+addr PASELC_H 0x0217 1
+addr PASELC 0x0216 1
+addr PAIES_L 0x0218 1
+addr PAIES_H 0x0219 1
+addr PAIES 0x0218 1
+addr PAIE_L 0x021a 1
+addr PAIE_H 0x021b 1
+addr PAIE 0x021a 1
+addr PAIFG_L 0x021c 1
+addr PAIFG_H 0x021d 1
+addr PAIFG 0x021c 1
+addr P1IV 0x020e 1
+addr P2IV 0x021e 1
+addr PBIN_L 0x0220 1
+addr PBIN_H 0x0221 1
+addr PBIN 0x0220 1
+addr PBOUT_L 0x0222 1
+addr PBOUT_H 0x0223 1
+addr PBOUT 0x0222 1
+addr PBDIR_L 0x0224 1
+addr PBDIR_H 0x0225 1
+addr PBDIR 0x0224 1
+addr PBREN_L 0x0226 1
+addr PBREN_H 0x0227 1
+addr PBREN 0x0226 1
+addr PBSEL0_L 0x022a 1
+addr PBSEL0_H 0x022b 1
+addr PBSEL0 0x022a 1
+addr PBSEL1_L 0x022c 1
+addr PBSEL1_H 0x022d 1
+addr PBSEL1 0x022c 1
+addr PBSELC_L 0x0236 1
+addr PBSELC_H 0x0237 1
+addr PBSELC 0x0236 1
+addr PBIES_L 0x0238 1
+addr PBIES_H 0x0239 1
+addr PBIES 0x0238 1
+addr PBIE_L 0x023a 1
+addr PBIE_H 0x023b 1
+addr PBIE 0x023a 1
+addr PBIFG_L 0x023c 1
+addr PBIFG_H 0x023d 1
+addr PBIFG 0x023c 1
+addr P3IV 0x022e 1
+addr P4IV 0x023e 1
+addr PJIN_L 0x0320 1
+addr PJIN_H 0x0321 1
+addr PJIN 0x0320 1
+addr PJOUT_L 0x0322 1
+addr PJOUT_H 0x0323 1
+addr PJOUT 0x0322 1
+addr PJDIR_L 0x0324 1
+addr PJDIR_H 0x0325 1
+addr PJDIR 0x0324 1
+addr PJREN_L 0x0326 1
+addr PJREN_H 0x0327 1
+addr PJREN 0x0326 1
+addr PJSEL0_L 0x032a 1
+addr PJSEL0_H 0x032b 1
+addr PJSEL0 0x032a 1
+addr PJSEL1_L 0x032c 1
+addr PJSEL1_H 0x032d 1
+addr PJSEL1 0x032c 1
+addr PJSELC_L 0x0336 1
+addr PJSELC_H 0x0337 1
+addr PJSELC 0x0336 1
+addr REFCTL0_L 0x01b0 2
+addr REFCTL0_H 0x01b1 2
+addr REFCTL0 0x01b0 2
+addr RTCCTL01_L 0x04a0 1
+addr RTCCTL01_H 0x04a1 1
+addr RTCCTL01 0x04a0 1
+addr RTCCTL23_L 0x04a2 1
+addr RTCCTL23_H 0x04a3 1
+addr RTCCTL23 0x04a2 1
+addr RTCPS0CTL_L 0x04a8 1
+addr RTCPS0CTL_H 0x04a9 1
+addr RTCPS0CTL 0x04a8 1
+addr RTCPS1CTL_L 0x04aa 1
+addr RTCPS1CTL_H 0x04ab 1
+addr RTCPS1CTL 0x04aa 1
+addr RTCPS_L 0x04ac 1
+addr RTCPS_H 0x04ad 1
+addr RTCPS 0x04ac 1
+addr RTCIV 0x04ae 1
+addr RTCTIM0_L 0x04b0 1
+addr RTCTIM0_H 0x04b1 1
+addr RTCTIM0 0x04b0 1
+addr RTCTIM1_L 0x04b2 1
+addr RTCTIM1_H 0x04b3 1
+addr RTCTIM1 0x04b2 1
+addr RTCDATE_L 0x04b4 1
+addr RTCDATE_H 0x04b5 1
+addr RTCDATE 0x04b4 1
+addr RTCYEAR_L 0x04b6 1
+addr RTCYEAR_H 0x04b7 1
+addr RTCYEAR 0x04b6 1
+addr RTCAMINHR_L 0x04b8 1
+addr RTCAMINHR_H 0x04b9 1
+addr RTCAMINHR 0x04b8 1
+addr RTCADOWDAY_L 0x04ba 1
+addr RTCADOWDAY_H 0x04bb 1
+addr RTCADOWDAY 0x04ba 1
+addr BIN2BCD 0x04bc 1
+addr BCD2BIN 0x04be 1
+addr SFRIE1_L 0x0100 2
+addr SFRIE1_H 0x0101 2
+addr SFRIE1 0x0100 2
+addr SFRIFG1_L 0x0102 2
+addr SFRIFG1_H 0x0103 2
+addr SFRIFG1 0x0102 2
+addr SFRRPCR_L 0x0104 2
+addr SFRRPCR_H 0x0105 2
+addr SFRRPCR 0x0104 2
+addr SYSCTL_L 0x0180 2
+addr SYSCTL_H 0x0181 2
+addr SYSCTL 0x0180 2
+addr SYSBSLC_L 0x0182 2
+addr SYSBSLC_H 0x0183 2
+addr SYSBSLC 0x0182 2
+addr SYSJMBC_L 0x0186 2
+addr SYSJMBC_H 0x0187 2
+addr SYSJMBC 0x0186 2
+addr SYSJMBI0_L 0x0188 2
+addr SYSJMBI0_H 0x0189 2
+addr SYSJMBI0 0x0188 2
+addr SYSJMBI1_L 0x018a 2
+addr SYSJMBI1_H 0x018b 2
+addr SYSJMBI1 0x018a 2
+addr SYSJMBO0_L 0x018c 2
+addr SYSJMBO0_H 0x018d 2
+addr SYSJMBO0 0x018c 2
+addr SYSJMBO1_L 0x018e 2
+addr SYSJMBO1_H 0x018f 2
+addr SYSJMBO1 0x018e 2
+addr SYSBERRIV_L 0x0198 2
+addr SYSBERRIV_H 0x0199 2
+addr SYSBERRIV 0x0198 2
+addr SYSUNIV_L 0x019a 2
+addr SYSUNIV_H 0x019b 2
+addr SYSUNIV 0x019a 2
+addr SYSSNIV_L 0x019c 2
+addr SYSSNIV_H 0x019d 2
+addr SYSSNIV 0x019c 2
+addr SYSRSTIV_L 0x019e 2
+addr SYSRSTIV_H 0x019f 2
+addr SYSRSTIV 0x019e 2
+addr TA0CTL 0x0340 1
+addr TA0CCTL0 0x0342 1
+addr TA0CCTL1 0x0344 1
+addr TA0CCTL2 0x0346 1
+addr TA0R 0x0350 1
+addr TA0CCR0 0x0352 1
+addr TA0CCR1 0x0354 1
+addr TA0CCR2 0x0356 1
+addr TA0IV 0x036e 1
+addr TA0EX0 0x0360 1
+addr TA1CTL 0x0380 1
+addr TA1CCTL0 0x0382 1
+addr TA1CCTL1 0x0384 1
+addr TA1CCTL2 0x0386 1
+addr TA1R 0x0390 1
+addr TA1CCR0 0x0392 1
+addr TA1CCR1 0x0394 1
+addr TA1CCR2 0x0396 1
+addr TA1IV 0x03ae 1
+addr TA1EX0 0x03a0 1
+addr TB0CTL 0x03c0 1
+addr TB0CCTL0 0x03c2 1
+addr TB0CCTL1 0x03c4 1
+addr TB0CCTL2 0x03c6 1
+addr TB0R 0x03d0 1
+addr TB0CCR0 0x03d2 1
+addr TB0CCR1 0x03d4 1
+addr TB0CCR2 0x03d6 1
+addr TB0EX0 0x03e0 1
+addr TB0IV 0x03ee 1
+addr TB1CTL 0x0400 1
+addr TB1CCTL0 0x0402 1
+addr TB1CCTL1 0x0404 1
+addr TB1CCTL2 0x0406 1
+addr TB1R 0x0410 1
+addr TB1CCR0 0x0412 1
+addr TB1CCR1 0x0414 1
+addr TB1CCR2 0x0416 1
+addr TB1IV 0x042e 1
+addr TB1EX0 0x0420 1
+addr TB2CTL 0x0440 1
+addr TB2CCTL0 0x0442 1
+addr TB2CCTL1 0x0444 1
+addr TB2CCTL2 0x0446 1
+addr TB2R 0x0450 1
+addr TB2CCR0 0x0452 1
+addr TB2CCR1 0x0454 1
+addr TB2CCR2 0x0456 1
+addr TB2IV 0x046e 1
+addr TB2EX0 0x0460 1
+addr UCA0CTLW0_L 0x05c0 1
+addr UCA0CTLW0_H 0x05c1 1
+addr UCA0CTLW0 0x05c0 1
+addr UCA0CTLW1_L 0x05c2 1
+addr UCA0CTLW1_H 0x05c3 1
+addr UCA0CTLW1 0x05c2 1
+addr UCA0BRW_L 0x05c6 1
+addr UCA0BRW_H 0x05c7 1
+addr UCA0BRW 0x05c6 1
+addr UCA0MCTLW_L 0x05c8 1
+addr UCA0MCTLW_H 0x05c9 1
+addr UCA0MCTLW 0x05c8 1
+addr UCA0STATW 0x05ca 1
+addr UCA0RXBUF_L 0x05cc 1
+addr UCA0RXBUF_H 0x05cd 1
+addr UCA0RXBUF 0x05cc 1
+addr UCA0TXBUF_L 0x05ce 1
+addr UCA0TXBUF_H 0x05cf 1
+addr UCA0TXBUF 0x05ce 1
+addr UCA0ABCTL 0x05d0 1
+addr UCA0IRCTL_L 0x05d2 1
+addr UCA0IRCTL_H 0x05d3 1
+addr UCA0IRCTL 0x05d2 1
+addr UCA0IE_L 0x05da 1
+addr UCA0IE_H 0x05db 1
+addr UCA0IE 0x05da 1
+addr UCA0IFG_L 0x05dc 1
+addr UCA0IFG_H 0x05dd 1
+addr UCA0IFG 0x05dc 1
+addr UCA0IV 0x05de 1
+addr UCB0CTLW0_L 0x0640 1
+addr UCB0CTLW0_H 0x0641 1
+addr UCB0CTLW0 0x0640 1
+addr UCB0CTLW1_L 0x0642 1
+addr UCB0CTLW1_H 0x0643 1
+addr UCB0CTLW1 0x0642 1
+addr UCB0BRW_L 0x0646 1
+addr UCB0BRW_H 0x0647 1
+addr UCB0BRW 0x0646 1
+addr UCB0STATW_L 0x0648 1
+addr UCB0STATW_H 0x0649 1
+addr UCB0STATW 0x0648 1
+addr UCB0TBCNT_L 0x064a 1
+addr UCB0TBCNT_H 0x064b 1
+addr UCB0TBCNT 0x064a 1
+addr UCB0RXBUF_L 0x064c 1
+addr UCB0RXBUF_H 0x064d 1
+addr UCB0RXBUF 0x064c 1
+addr UCB0TXBUF_L 0x064e 1
+addr UCB0TXBUF_H 0x064f 1
+addr UCB0TXBUF 0x064e 1
+addr UCB0I2COA0_L 0x0654 1
+addr UCB0I2COA0_H 0x0655 1
+addr UCB0I2COA0 0x0654 1
+addr UCB0I2COA1_L 0x0656 1
+addr UCB0I2COA1_H 0x0657 1
+addr UCB0I2COA1 0x0656 1
+addr UCB0I2COA2_L 0x0658 1
+addr UCB0I2COA2_H 0x0659 1
+addr UCB0I2COA2 0x0658 1
+addr UCB0I2COA3_L 0x065a 1
+addr UCB0I2COA3_H 0x065b 1
+addr UCB0I2COA3 0x065a 1
+addr UCB0ADDRX_L 0x065c 1
+addr UCB0ADDRX_H 0x065d 1
+addr UCB0ADDRX 0x065c 1
+addr UCB0ADDMASK_L 0x065e 1
+addr UCB0ADDMASK_H 0x065f 1
+addr UCB0ADDMASK 0x065e 1
+addr UCB0I2CSA_L 0x0660 1
+addr UCB0I2CSA_H 0x0661 1
+addr UCB0I2CSA 0x0660 1
+addr UCB0IE_L 0x066a 1
+addr UCB0IE_H 0x066b 1
+addr UCB0IE 0x066a 1
+addr UCB0IFG_L 0x066c 1
+addr UCB0IFG_H 0x066d 1
+addr UCB0IFG 0x066c 1
+addr UCB0IV 0x066e 1
+addr UCA1CTLW0_L 0x05e0 1
+addr UCA1CTLW0_H 0x05e1 1
+addr UCA1CTLW0 0x05e0 1
+addr UCA1CTLW1_L 0x05e2 1
+addr UCA1CTLW1_H 0x05e3 1
+addr UCA1CTLW1 0x05e2 1
+addr UCA1BRW_L 0x05e6 1
+addr UCA1BRW_H 0x05e7 1
+addr UCA1BRW 0x05e6 1
+addr UCA1MCTLW_L 0x05e8 1
+addr UCA1MCTLW_H 0x05e9 1
+addr UCA1MCTLW 0x05e8 1
+addr UCA1STATW 0x05ea 1
+addr UCA1RXBUF_L 0x05ec 1
+addr UCA1RXBUF_H 0x05ed 1
+addr UCA1RXBUF 0x05ec 1
+addr UCA1TXBUF_L 0x05ee 1
+addr UCA1TXBUF_H 0x05ef 1
+addr UCA1TXBUF 0x05ee 1
+addr UCA1ABCTL 0x05f0 1
+addr UCA1IRCTL_L 0x05f2 1
+addr UCA1IRCTL_H 0x05f3 1
+addr UCA1IRCTL 0x05f2 1
+addr UCA1IE_L 0x05fa 1
+addr UCA1IE_H 0x05fb 1
+addr UCA1IE 0x05fa 1
+addr UCA1IFG_L 0x05fc 1
+addr UCA1IFG_H 0x05fd 1
+addr UCA1IFG 0x05fc 1
+addr UCA1IV 0x05fe 1
+addr WDTCTL_L 0x015c 2
+addr WDTCTL_H 0x015d 2
+addr WDTCTL 0x015c 2
+interrupt TIMERB1_ISR check_TIMERB1
+interrupt TIMERB0_ISR check_TIMERB0
+interrupt RTC_ISR check_RTC
+interrupt PORT4_ISR check_PORT4
+interrupt PORT3_ISR check_PORT3
+interrupt TIMER2_B1_ISR check_TIMER2_B1
+interrupt TIMER2_B0_ISR check_TIMER2_B0
+interrupt PORT2_ISR check_PORT2
+interrupt TIMER1_B1_ISR check_TIMER1_B1
+interrupt TIMER1_B0_ISR check_TIMER1_B0
+interrupt PORT1_ISR check_PORT1
+interrupt TIMER1_A1_ISR check_TIMER1_A1
+interrupt TIMER1_A0_ISR check_TIMER1_A0
+interrupt DMA_ISR check_DMA
+interrupt USCI_A1_ISR check_USCI_A1
+interrupt TIMER0_A1_ISR check_TIMER0_A1
+interrupt TIMER0_A0_ISR check_TIMER0_A0
+interrupt ADC10_ISR check_ADC10
+interrupt USCI_B0_ISR check_USCI_B0
+interrupt USCI_A0_ISR check_USCI_A0
+interrupt WDT_ISR check_WDT
+interrupt TIMER0_B1_ISR check_TIMER0_B1
+interrupt TIMER0_B0_ISR check_TIMER0_B0
+interrupt COMP_D_ISR check_COMP_D
+interrupt UNMI_ISR check_UNMI
+interrupt SYSNMI_ISR check_SYSNMI
+interrupt RESET_ISR check_RESET
+interrupt 2FLASH_IP_ISR check_2FLASH_IP
+interrupt 8BTC_ISR check_8BTC
+interrupt ADC10_ISR check_ADC10
+interrupt ADC10_A_ISR check_ADC10_A
+interrupt ADC10_B_ISR check_ADC10_B
+interrupt ADC12_ISR check_ADC12
+interrupt ADC12_B_ISR check_ADC12_B
+interrupt ADC12_PLUS_ISR check_ADC12_PLUS
+interrupt ADC14_ISR check_ADC14
+interrupt AES_ISR check_AES
+interrupt AES256_ISR check_AES256
+interrupt APOOL_ISR check_APOOL
+interrupt AUX_SUPPLY_ISR check_AUX_SUPPLY
+interrupt BACKUP_RAM_ISR check_BACKUP_RAM
+interrupt BASIC_CLOCK_ISR check_BASIC_CLOCK
+interrupt BATTERY_CHARGER_ISR check_BATTERY_CHARGER
+interrupt BC2_ISR check_BC2
+interrupt BT_ISR check_BT
+interrupt BT_RTC_ISR check_BT_RTC
+interrupt CAPLUS_ISR check_CAPLUS
+interrupt CAP_TOUCH_IO_0_ISR check_CAP_TOUCH_IO_0
+interrupt CAP_TOUCH_IO_1_ISR check_CAP_TOUCH_IO_1
+interrupt CC1101_ISR check_CC1101
+interrupt CCS_ISR check_CCS
+interrupt COMPA_ISR check_COMPA
+interrupt COMPB_ISR check_COMPB
+interrupt COMPD_ISR check_COMPD
+interrupt COMP_E_ISR check_COMP_E
+interrupt CRC_ISR check_CRC
+interrupt CS_ISR check_CS
+interrupt DAC12_1_ISR check_DAC12_1
+interrupt DAC12_2_ISR check_DAC12_2
+interrupt DMAX_3_ISR check_DMAX_3
+interrupt DMAX_6_ISR check_DMAX_6
+interrupt DMA_1_ISR check_DMA_1
+interrupt DMA_3_ISR check_DMA_3
+interrupt EPROM_ISR check_EPROM
+interrupt ESP430E_ISR check_ESP430E
+interrupt EUSCI_A0_ISR check_EUSCI_A0
+interrupt EUSCI_A1_ISR check_EUSCI_A1
+interrupt EUSCI_A2_ISR check_EUSCI_A2
+interrupt EUSCI_A3_ISR check_EUSCI_A3
+interrupt EUSCI_B0_ISR check_EUSCI_B0
+interrupt EUSCI_B1_ISR check_EUSCI_B1
+interrupt FLASH_ISR check_FLASH
+interrupt FLASH2_ISR check_FLASH2
+interrupt FLL_ISR check_FLL
+interrupt FLLPLUS_ISR check_FLLPLUS
+interrupt FLLPLUS_SMALL_ISR check_FLLPLUS_SMALL
+interrupt FRAM_ISR check_FRAM
+interrupt FRAM_FR5XX_ISR check_FRAM_FR5XX
+interrupt I2C_ISR check_I2C
+interrupt LCD_ISR check_LCD
+interrupt LCD4_ISR check_LCD4
+interrupt LCD_A_ISR check_LCD_A
+interrupt LCD_B_ISR check_LCD_B
+interrupt LCD_C_ISR check_LCD_C
+interrupt MID_ISR check_MID
+interrupt MPU_ISR check_MPU
+interrupt MPY_ISR check_MPY
+interrupt MPY32_ISR check_MPY32
+interrupt MSP430XV2_CPU_ISR check_MSP430XV2_CPU
+interrupt MSP430X_CPU_ISR check_MSP430X_CPU
+interrupt OA_2_ISR check_OA_2
+interrupt OA_3_ISR check_OA_3
+interrupt PMM_ISR check_PMM
+interrupt PMM_FR5xx_ISR check_PMM_FR5xx
+interrupt PMM_FRAM_ISR check_PMM_FRAM
+interrupt PORT0_ISR check_PORT0
+interrupt PORT1_ISR check_PORT1
+interrupt PORT10_ISR check_PORT10
+interrupt PORT10_R_ISR check_PORT10_R
+interrupt PORT11_R_ISR check_PORT11_R
+interrupt PORT1_MAPPING_ISR check_PORT1_MAPPING
+interrupt PORT1_R_ISR check_PORT1_R
+interrupt PORT2_ISR check_PORT2
+interrupt PORT2_MAPPING_ISR check_PORT2_MAPPING
+interrupt PORT2_R_ISR check_PORT2_R
+interrupt PORT3_ISR check_PORT3
+interrupt PORT3_MAPPING_ISR check_PORT3_MAPPING
+interrupt PORT3_R_ISR check_PORT3_R
+interrupt PORT4_ISR check_PORT4
+interrupt PORT4_MAPPING_ISR check_PORT4_MAPPING
+interrupt PORT4_R_ISR check_PORT4_R
+interrupt PORT5_ISR check_PORT5
+interrupt PORT5_R_ISR check_PORT5_R
+interrupt PORT6_ISR check_PORT6
+interrupt PORT6_R_ISR check_PORT6_R
+interrupt PORT7_ISR check_PORT7
+interrupt PORT7_R_ISR check_PORT7_R
+interrupt PORT8_ISR check_PORT8
+interrupt PORT8_R_ISR check_PORT8_R
+interrupt PORT9_ISR check_PORT9
+interrupt PORT9_R_ISR check_PORT9_R
+interrupt PORTA_ISR check_PORTA
+interrupt PORTA_R_ISR check_PORTA_R
+interrupt PORTB_ISR check_PORTB
+interrupt PORTB_R_ISR check_PORTB_R
+interrupt PORTC_R_ISR check_PORTC_R
+interrupt PORTD_R_ISR check_PORTD_R
+interrupt PORTE_R_ISR check_PORTE_R
+interrupt PORTF_R_ISR check_PORTF_R
+interrupt PORTJ_R_ISR check_PORTJ_R
+interrupt PORT_MAPPING_ISR check_PORT_MAPPING
+interrupt PU_ISR check_PU
+interrupt RC_ISR check_RC
+interrupt REF_ISR check_REF
+interrupt REF_A_ISR check_REF_A
+interrupt RTC_ISR check_RTC
+interrupt RTC_B_ISR check_RTC_B
+interrupt RTC_C_ISR check_RTC_C
+interrupt RTC_D_ISR check_RTC_D
+interrupt SCANIF_ISR check_SCANIF
+interrupt SD16_2_ISR check_SD16_2
+interrupt SD16_3_ISR check_SD16_3
+interrupt SD16_A1_ISR check_SD16_A1
+interrupt SD16_A3_ISR check_SD16_A3
+interrupt SD16_A4_ISR check_SD16_A4
+interrupt SD16_A6_ISR check_SD16_A6
+interrupt SD16_A7_ISR check_SD16_A7
+interrupt SD24_A1_ISR check_SD24_A1
+interrupt SD24_A2_ISR check_SD24_A2
+interrupt SD24_A3_ISR check_SD24_A3
+interrupt SD24_B_ISR check_SD24_B
+interrupt SD24_B2_ISR check_SD24_B2
+interrupt SD24_B3_ISR check_SD24_B3
+interrupt SD24_B4_ISR check_SD24_B4
+interrupt SD24_B6_ISR check_SD24_B6
+interrupt SD24_B7_ISR check_SD24_B7
+interrupt SFR_ISR check_SFR
+interrupt SVS_ISR check_SVS
+interrupt SYS_ISR check_SYS
+interrupt T0A3_ISR check_T0A3
+interrupt T0A5_ISR check_T0A5
+interrupt T0B3_ISR check_T0B3
+interrupt T0B7_ISR check_T0B7
+interrupt T0D3_ISR check_T0D3
+interrupt T1A2_ISR check_T1A2
+interrupt T1A3_ISR check_T1A3
+interrupt T1A5_ISR check_T1A5
+interrupt T1B3_ISR check_T1B3
+interrupt T1D3_ISR check_T1D3
+interrupt T2A2_ISR check_T2A2
+interrupt T2A3_ISR check_T2A3
+interrupt T2B3_ISR check_T2B3
+interrupt T3A2_ISR check_T3A2
+interrupt TA2_ISR check_TA2
+interrupt TA3_ISR check_TA3
+interrupt TA5_ISR check_TA5
+interrupt TB3_ISR check_TB3
+interrupt TB7_ISR check_TB7
+interrupt TEV0_ISR check_TEV0
+interrupt TEV1_ISR check_TEV1
+interrupt TLV_ISR check_TLV
+interrupt TP_ISR check_TP
+interrupt UART0_ISR check_UART0
+interrupt UART1_ISR check_UART1
+interrupt UCS_ISR check_UCS
+interrupt UCS_RF_ISR check_UCS_RF
+interrupt USB_ISR check_USB
+interrupt USCI_ISR check_USCI
+interrupt USCI_A0_ISR check_USCI_A0
+interrupt USCI_A1_ISR check_USCI_A1
+interrupt USCI_A2_ISR check_USCI_A2
+interrupt USCI_A3_ISR check_USCI_A3
+interrupt USCI_AB0_ISR check_USCI_AB0
+interrupt USCI_AB1_ISR check_USCI_AB1
+interrupt USCI_B0_ISR check_USCI_B0
+interrupt USCI_B1_ISR check_USCI_B1
+interrupt USCI_B2_ISR check_USCI_B2
+interrupt USCI_B3_ISR check_USCI_B3
+interrupt USI_ISR check_USI
+interrupt WDT_ISR check_WDT
+interrupt WDT_A_ISR check_WDT_A

@@ -1,0 +1,56 @@
+addr Info_length 0x1A00 1
+anno Info_length const_val=0x06
+addr CRC_length 0x1A01 1
+anno CRC_length const_val=0x06
+addr CRC_value 0x1A02 2
+addr Device_ID 0x1A04 1
+anno Device_ID const_val=0x55
+addr Device_ID2 0x1A05 1
+anno Device_ID2 const_val=0x21
+addr Hardware_revision 0x1A06 1
+addr Firmware_revision 0x1A07 1
+
+addr Die_record_tag 0x1A08 1
+anno Die_record_tag const_val=0x08
+addr Die_record_length 0x1A09 1
+anno Die_record_length const_val=0x0A
+addr Lot_wafer_id 0x1A0A 4
+anno Lot_wafer_id const_val=0x01020304
+addr Die_x_pos 0x1A0E 2
+anno Die_x_pos const_val=0x0001
+addr Die_y_pos 0x1A10 2
+anno Die_y_pos const_val=0x0002
+addr Test_results 0x1A12 2
+
+addr ADC12_calibration_tag 0x1A14 1
+anno ADC12_calibration_tag const_val=0x11
+addr ADC12_calibration_length 0x1A15 1
+anno ADC12_calibration_length const_val=0x10
+addr ADC12_gain_factor 0x1A16 2
+addr ADC12_offset 0x1A18 2
+addr ADC12_15temp30 0x1A1A 2
+addr ADC12_15temp85 0x1A1C 2
+addr ADC12_20temp30 0x1A1E 2
+addr ADC12_20temp85 0x1A20 2
+addr ADC12_25temp30 0x1A22 2
+addr ADC12_25temp85 0x1A24 2
+
+
+addr REF_calibration_tag 0x1A26 1
+anno REF_calibration_tag const_val=0x12
+addr REF_calibration_length 0x1A27 1
+anno REF_calibration_length const_val=0x06
+addr REF_15reference_factor 0x1A28 1
+addr REF_20reference_factor 0x1A2A 1
+addr REF_25reference_factor 0x1A2C 1
+
+addr Peripheral_descriptor_tag 0x1A2E 1
+anno Peripheral_descriptor_tag const_val=0x02
+addr Peripheral_descriptor_length 0x1A2F 1
+anno Peripheral_descriptor_length const_val=0x64
+
+
+anno USBPWRCTL_L const_val=0xFF
+anno USBPWRCTL_H const_val=0xFF
+anno USBCNF_L const_val=0xFF
+anno USBCNF_H const_val=0xFF

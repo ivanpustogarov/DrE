@@ -1,0 +1,46 @@
+.PHONY: all
+
+include ../../../Makefile.defs
+
+SYMBEX = $(fie_root)/engine
+LIBC_OBJS = abort.bc atexit.bc atoi.bc calloc.bc htonl.bc \
+memchr.bc memcmp.bc memcpy.bc memmove.bc mempcpy.bc memset.bc putchar.bc \
+stpcpy.bc strcat.bc strchr.bc strcmp.bc strcoll.bc strcpy.bc strlen.bc \
+strncmp.bc strncpy.bc strrchr.bc strtol.bc strtoul.bc tolower.bc toupper.bc
+
+CC = msp430-gcc
+	
+INC = -I$(SYMBEX)/include -I$(llvm_root)/include -I$(SYMBEX)/lib/Core
+
+all:
+	rm -f libregisters.so libinterrupts.so
+	g++ -c -fPIC -o registers.o registers.cpp $(INC) -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS
+	g++ -shared -Wl,-soname,libregisters.so.1 -o libregisters.so.1.0.1 registers.o -lc
+	ln -s libregisters.so.1.0.1 libregisters.so
+	clang -ccc-host-triple msp430-elf -I$(fie_root)/plugin_gen/common -I$(fie_root)/plugin_gen/include -D__MSP430__=1 fake_regs.c -emit-llvm -c -o fake_regs.bc
+
+reset:
+	python $(fie_root)/plugin_gen/scripts/layout_maker2.py $(CHIP) $(fie_root)/plugin_gen/msp430mcu-20130321
+	python $(fie_root)/plugin_gen/scripts/header_maker.py $(fie_root)/plugin_gen/msp430mcu-20130321/upstream/$(CHIP).h
+	python $(fie_root)/plugin_gen/scripts/dummy_funs.py
+	make all
+
+fuzz:
+	python $(fie_root)/plugin_gen/scripts/layout_maker2.py $(CHIP) $(fie_root)/plugin_gen/msp430mcu-20130321
+	python $(fie_root)/plugin_gen/scripts/header_maker.py $(fie_root)/plugin_gen/msp430mcu-20130321/upstream/$(CHIP).h
+	python $(fie_root)/plugin_gen/scripts/dummy_funs.py fuzz
+	make all
+
+fail:
+	python $(fie_root)/plugin_gen/scripts/layout_maker2.py $(CHIP) $(fie_root)/plugin_gen/msp430mcu-20130321
+	python $(fie_root)/plugin_gen/scripts/header_maker.py $(fie_root)/plugin_gen/msp430mcu-20130321/upstream/$(CHIP).h
+	python $(fie_root)/plugin_gen/scripts/dummy_funs.py fail
+	make all
+
+clean:
+	rm -f libregisters.so.1.0.1 libregisters.so registers.o \
+        libinterrupts.so.1.0.1 libinterrupts.so interrupts.o \
+        fake_regs.bc
+
+pure: clean
+	rm -f new_decl.h fake_regs.c layout.txt
