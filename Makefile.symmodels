@@ -1,0 +1,7 @@
+all:
+	make -C memorymodels
+	make -C interrupts
+
+clean:
+	make -C memorymodels clean
+	make -C interrupts clean
