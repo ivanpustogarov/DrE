@@ -1,12 +1,5 @@
 all:
-	../../plugin_gen/scripts/build.py .
+	./build.sh	
 
 clean:
-	../../plugin_gen/scripts/build.py . clean
-
-fuzz:
-	../../plugin_gen/scripts/build.py . fuzz
-
-reset:
-	../../plugin_gen/scripts/build.py . reset
-	make all
+	./build.sh clean

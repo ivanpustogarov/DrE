@@ -1,17 +1,22 @@
 DRE_ROOT=$(HOME)/Workspaces/DrE
-LLVM_ROOT=$(HOME)/Workspaces/llvm-3.4
-INC = -I$(DRE_ROOT)/include -I$(LLVM_ROOT)/include -I$(DRE_ROOT)/lib/Core
+PLATFORM= $(shell uname)
+DRE_ROOT=../../../
+INCLUDE_DRE = -I$(DRE_ROOT)/include -I$(DRE_ROOT)/lib/Core
 
 all:
-	@echo "Possible targets: linux macos"
-linux:
+ifeq ($(LLVM_ROOT),)
+	$(error Set variable LLVM_ROOT to the llvm-3.4 path.)
+endif
+	$(eval INCLUDE_LLVM=-I$(LLVM_ROOT)/include)
+ifeq ($(PLATFORM),Linux)
 	rm -f libregisters.so libinterrupts.so
-	g++ -c -fPIC -o registers.o registers.cpp $(INC) -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS
+	g++ -c -fPIC -o registers.o registers.cpp $(INCLUDE_DRE) $(INCLUDE_LLVM) -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS
 	g++ -shared -o libregisters.so registers.o -lc
-
-
-macos:
-	clang -shared -undefined dynamic_lookup $(INC) -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS  -o libregisters.so registers.cpp
+else
+ifeq ($(PLATFORM),Darwin)
+	clang -shared -undefined dynamic_lookup $(INCLUDE_DRE) $(INCLUDE_LLVM) -D__STDC_LIMIT_MACROS -D__STDC_CONSTANT_MACROS  -o libregisters.so registers.cpp
+endif
+endif
 
 
 clean:
