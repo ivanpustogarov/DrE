@@ -1,7 +1,7 @@
 all:
 	make -C bbl
-	make -C never
+	make -C cpuoff
 
 clean:
 	make -C bbl clean
-	make -C never clean
+	make -C cpuoff clean
