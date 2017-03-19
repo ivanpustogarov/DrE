@@ -97,7 +97,7 @@ and interrupts. DrE is able to handle both.
 Compile this example as follows (use clang from llvm-3.4):
 
 ```
-$ cd examples2/toy-example1.c
+$ cd examples2/toy-example1
 $ make
 $ ./run-dre.sh main.bc
 ```
