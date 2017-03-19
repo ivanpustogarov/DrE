@@ -7,7 +7,7 @@ Key features:
 
   * Is able to analyse code written for MSP430 family of microcontrollers
   * MSP430 Interrupt and memory models (e.g it supports reads from ADC and other peripherals)
-  * Compositional: it can execute function in isolation and 
+  * Compositional: it can execute functions in isolation and 
     collect execution paths.
   * Directed: It tries to find execution paths toward the target line.
     It has two modes of operation: 1) "Forward mode" which prefers shortest
