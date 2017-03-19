@@ -79,11 +79,12 @@ $ make
 
 Build interrupt/memory models, set path to llvm-3.4
 ```
+$ export LLVM_ROOT=/path/to/llvm-3.4
 $ cd interrupts
 $ make && cd ../
 $ cd memorymodels
 $ make
-$ export LLVM_ROOT=/path/to/llvm-3.4
+
 ```
 
 ## Example
