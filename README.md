@@ -8,7 +8,7 @@ Key features:
   * Is able to analyse code written for MSP430 family of microcontrollers
   * MSP430 Interrupt and memory models
   * Compositional: it can execute function in isolation and 
-    build function summaries.
+    collect execution paths.
   * Directed: It tries to find execution paths toward the target line.
     It has two modes of operation: 1) "Forward mode" which prefers shortest
     paths in ICFG toward the target line;
@@ -42,7 +42,8 @@ point and employs a state-pruning strategy to break out of infinite wait
 loops.
 
 ## Compile instructions 
-Compiling DrE is simimlar to compiling KLEE. Here is a summary.
+Compiling DrE is simimlar to compiling KLEE (http://klee.github.io/build-llvm34/).
+Here is a short summary.
 
 ```
 sudo apt-get install build-essential curl libcap-dev git cmake libncurses5-dev python-minimal python-pip unzip
@@ -72,17 +73,27 @@ http://klee.github.io/build-stp/
 Build DrE
 
 ```
-CC=gcc CXX=g++ ./configure --with-uclibc=/home/ivan/Workspaces/klee-uclibc --with-llvm=/home/ivan/Workspaces/llvm-3.4 --enable-posix-runtime
+$ CC=gcc CXX=g++ ./configure --with-llvm=/path/to/llvm-3.4
+$ make
+```
+
+Build interrupt and memory models
+```
+$ cd interrupts
+$ make && cd ../
+$ cd memorymodels
+$ make
 ```
 
 ## Example
-Let's look at examples2/toy-example1 (see below).
+Consider examples2/toy-example1.c (see below).
 It uses peripheral-related memory locations (e.g. `ADC10MEM`),
 and and interrupt. DrE is able to handle both.
 
 Compile this example as follows (use clang from llvm-3.4):
 
 ```
+cd examples2/toy-example1.c
 clang -D__MSP430G2553__ --target=msp430 -I../../memorymodels/symbolic/msp430g2553 -g -emit-llvm -Wall -c main.c
 path-to-DrE/Release+Asserts/bin/klee -search=random-state -entry-point=main -start-fn=main -target-fn=assert -mmodel=symbolic -imodel=cpuoff -plugpath=/path/to/DrE -chip=msp430g2553 main.bc
 ```
