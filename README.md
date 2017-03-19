@@ -6,16 +6,16 @@ DrE is an early research prototype and work in progress.
 Key features: 
 
   * Is able to analyse code written for MSP430 family of microcontrollers
-  * MSP430 Interrupt and memory models
+  * MSP430 Interrupt and memory models (e.g it supports reads from ADC and other peripherals)
   * Compositional: it can execute function in isolation and 
     collect execution paths.
   * Directed: It tries to find execution paths toward the target line.
     It has two modes of operation: 1) "Forward mode" which prefers shortest
     paths in ICFG toward the target line;
-    2) Compositional mode in which tries to smartly combine function
-    summaries.
+    2) Compositional mode in which it tries to smartly combine (or stitch) function
+    summaries by progapagating relevant constrainst.
 
-## About Directed Symbolic Execution
+## About Directed Symbolic Execution and DrE
 Instead of attempting to explore all code paths, directed symbolic
 execution starts with a target, i.e., a particular point of interest in
 the program.  The output of a successful directed symbolic execution is
@@ -77,28 +77,30 @@ $ CC=gcc CXX=g++ ./configure --with-llvm=/path/to/llvm-3.4
 $ make
 ```
 
-Build interrupt and memory models
+Build interrupt/memory models, set path to llvm-3.4
 ```
 $ cd interrupts
 $ make && cd ../
 $ cd memorymodels
 $ make
+$ export LLVM_ROOT=/path/to/llvm-3.4
 ```
 
 ## Example
 Consider examples2/toy-example1.c (see below).
+
 It uses peripheral-related memory locations (e.g. `ADC10MEM`),
-and and interrupt. DrE is able to handle both.
+and interrupts. DrE is able to handle both.
 
 Compile this example as follows (use clang from llvm-3.4):
 
 ```
-cd examples2/toy-example1.c
-clang -D__MSP430G2553__ --target=msp430 -I../../memorymodels/symbolic/msp430g2553 -g -emit-llvm -Wall -c main.c
-path-to-DrE/Release+Asserts/bin/klee -search=random-state -entry-point=main -start-fn=main -target-fn=assert -mmodel=symbolic -imodel=cpuoff -plugpath=/path/to/DrE -chip=msp430g2553 main.bc
+$ cd examples2/toy-example1.c
+$ make
+$ ./run-dre.sh main.bc
 ```
-
-It should generate lots of debug output with the following lines at the end (which is the path constraints):
+This should find path constraint necessary to reach call to assert() function.
+It will generate lots of debug output with the following lines at the end (which is the path constraints):
 
 ```
 BINGO! Here is are the constraints in KQUERY format:
@@ -168,29 +170,3 @@ void __attribute__ ((interrupt(ADC10_VECTOR))) ADC10_ISR (void)
   __bic_SR_register_on_exit(CPUOFF);        // Clear CPUOFF bit from 0(SR)
 }
 ```
-
-
-
-## About KLEE
-`KLEE` is a symbolic virtual machine built on top of the LLVM compiler
-infrastructure. Currently, there are two primary components:
-
-  1. The core symbolic virtual machine engine; this is responsible for
-     executing LLVM bitcode modules with support for symbolic
-     values. This is comprised of the code in lib/.
-
-  2. A POSIX/Linux emulation layer oriented towards supporting uClibc,
-     with additional support for making parts of the operating system
-     environment symbolic.
-
-Additionally, there is a simple library for replaying computed inputs
-on native code (for closed programs). There is also a more complicated
-infrastructure for replaying the inputs generated for the POSIX/Linux
-emulation layer, which handles running native programs in an
-environment that matches a computed test input, including setting up
-files, pipes, environment variables, and passing command line
-arguments.
-
-Coverage information can be found [here](http://vm-klee.doc.ic.ac.uk:55555/index.html).
-
-For further information, see the [webpage](http://klee.github.io/).
