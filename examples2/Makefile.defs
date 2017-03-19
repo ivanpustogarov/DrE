@@ -1,0 +1,31 @@
+# Targets
+LLVM_LL=main.ll
+LLVM_BITCODES=main.bc
+
+# Please set your device here
+MMODEL_PATH = $(shell echo "$(CHIP)" | tr '[:upper:]' '[:lower:]')
+DEVICE = $(shell echo "$(CHIP)" | tr '[:lower:]' '[:upper:]')
+
+# Flags for clang-3.4
+CLANG = $(LLVM_ROOT)/Release+Asserts/bin/clang
+CLANG_FLAGS = -D__$(DEVICE)__ --target=msp430 -I../../memorymodels/symbolic/$(MMODEL_PATH) -g -emit-llvm -Wall -c
+
+
+all: bitcode
+
+bitcode: $(LLVM_BITCODES) $(LLVM_LL)
+
+%.bc : %.c
+ifeq ($(LLVM_ROOT),)
+	$(error Set variable LLVM_ROOT to the llvm-3.4 path.)
+endif
+	$(CLANG) $(CLANG_FLAGS) $< -o $@
+
+%.ll : %.c
+	$(CLANG) $(CLANG_FLAGS) -S $< -o $@
+
+
+
+clean:
+	rm -f $(LLVM_BITCODES) $(LLVM_LL)
+	rm -rf klee-out-* klee-last
