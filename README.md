@@ -87,8 +87,9 @@ $ export LLVM_ROOT=/path/to/llvm-3.4
 ```
 
 ## Example
-Consider examples2/toy-example1.c (see below).
+Don't forget to set ``LLVM_ROOT`` environment variable.
 
+Consider examples2/toy-example1.c (see below).
 It uses peripheral-related memory locations (e.g. `ADC10MEM`),
 and interrupts. DrE is able to handle both.
 
