@@ -1,4 +1,4 @@
-DrE: DiRected Compositional Symbolic Executor for MSP430 (KLEE-based)
+DrE: DiRected compositional symbolic Executor for MSP430 (KLEE-based)
 =============================
 
 DrE is an early research prototype and work in progress.
