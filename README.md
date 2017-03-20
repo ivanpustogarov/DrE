@@ -6,6 +6,7 @@ DrE is an early research prototype and work in progress.
 Key features: 
 
   * Is able to analyse code written for MSP430 family of microcontrollers
+     (msp430f149, msp430f2012, msp430f2013, msp430f5310, msp430g2211, msp430g2231, msp430g2553)
   * MSP430 Interrupt and memory models (e.g it supports reads from ADC and other peripherals)
   * Compositional: it can execute functions in isolation and 
     collect execution paths.
